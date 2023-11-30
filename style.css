@@ -38,7 +38,7 @@ a{
 .card-div a{
     background-color: rgb(95, 94, 94);
     padding: 0.3rem 0.5rem;
-    width: 100px;
+    width: fit-content;
     border-radius: 10px;
 }
 
@@ -66,6 +66,7 @@ nav{
     justify-content: space-around;
     padding: 1rem;
     font-size: 18px;
+    animation: 1s all ease;
 }
 
 .tab a {
@@ -117,7 +118,7 @@ nav{
 .card-div .inner-card{
     display: flex;
     flex-direction:column;
-    font-size: 17px;
+    font-size: 15px;
     gap:10px;
     border: 1px solid black;
     background: rgb(34,193,195);
@@ -129,6 +130,9 @@ nav{
     margin: 1rem;
     padding: 1rem;
 }
+.inner-card a{
+    font-size: 15px;
+}
 
 #qualifications img{
     background-color: black;
@@ -137,13 +141,7 @@ nav{
     border-radius:10px;
 }
 
-.tab-hide{
-    display:none;
-}
 
-.tab-show{
-    display: flex;
-}
 
 @media (max-width:468px) {
 
@@ -152,7 +150,12 @@ nav{
     }
 
     .tab{
-        display: none;
+        padding: 0.5rem;
+        flex-wrap:wrap;
+    }
+    .tab a{
+        padding:0.3rem;
+        font-size:15px;
     }
     
     .tab-toggle{
@@ -170,6 +173,9 @@ nav{
     }
     .inner-card a{
         padding:0.2rem;
-        font-size: 16px;
+        font-size: 12px;
+    }
+    .inner-card{
+        width: 200%;
     }
 }
