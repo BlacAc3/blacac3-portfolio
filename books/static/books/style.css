@@ -1,0 +1,593 @@
+/* Default Setting */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    }
+
+:root{
+    --bkclr:rgba(0, 0, 0, 0.574);
+    --txtclrl:rgb(68, 68, 67);
+    --txtclrd:rgb(0, 0, 0);
+    --sectclr:rgba(121, 160, 166, 0.361);
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+a{
+    text-decoration: none;
+    color:var(--txtclrl); 
+}
+a:hover{
+    cursor: pointer;
+}
+
+#body{
+    margin-top: 90px;
+    
+}
+
+#inner-body{
+    display: none;
+}
+
+
+
+
+
+
+/* nav bar styling */
+/* ----------------------------------------------------------------------------------------------- */
+header{
+    width: 100%;
+    position:fixed;
+    height: min(auto,50px);
+    top:0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    z-index: 99;
+    border-bottom: 1px solid black;
+    background-color: beige;
+}
+
+.nav-title{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:var(--txtclrl);
+    transition: all 0.3s ease;
+}
+.nav-title:hover{
+    color:rgb(196, 196, 139);
+}
+
+.navbar{
+    display:flex;
+    align-items: center;
+    width: auto;
+}
+
+.navbar a{
+    position: relative;
+    font-size: 1.2rem;
+    margin-left: 1.5em;
+    font-weight: 700;
+}
+
+/* white line move on hover design */
+.navbar .page::after {
+    position: absolute;
+    bottom:-6px;
+    left:0;
+    content: "";
+    text-align: center;
+    border-radius: 8rem;
+    width: 100%;
+    height: 4px;
+    background: var(--txtclrl);
+    transition: all 0.35s ease-in-out;
+    scale:0;
+    
+}
+
+.navbar .page:hover::after{
+    scale:1;
+}
+
+/* login styling */
+.log{
+    color: var(--txtclrl);
+    border-radius: 10px;
+    padding: 0.5em;
+    transition: all 0.4s ease;
+}
+
+.log:hover{
+    background: rgb(141, 141, 141);
+    color:var(--txtclrd);
+}
+
+/* search button styling */
+.search-button svg{
+    transform: translateY(0);
+}
+
+.search-button:hover{
+    cursor: pointer;
+}
+
+/* menu icon styling */
+.menu-icon{
+    width: 30px;
+    height: 30px;
+    position:relative;
+    cursor:pointer;
+    margin-right:20px ;
+}
+
+.menu-icon span{
+    display: block;
+    padding:auto 2px;
+    margin: 5px 0;
+    width: 100%;
+    height:4px;
+    background: var(--txtclrl);
+    border-radius:18px;
+}
+
+/* nav popup for small and medium width devices */
+.mobile_nav{
+    position:fixed;
+    top: 84px;
+    right: 3px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    padding: 30px;
+    width: 50vw;
+    gap:20px;
+    height: fit-content;
+    background: rgba(48, 48, 48, 0.915);
+    background:blur ;
+    border-radius: 20px;
+    border: 2px solid var(--txtclrl);
+    transition: all 0.3s ease-out;
+    z-index: 98;
+}
+
+
+.mobile_nav a{
+    color: beige;
+    text-align: center;
+    position:relative;
+    font-size: 1.9rem;
+    font-weight: bold;
+    width: 90%;
+    margin: auto;
+    transition: all 0.2s ease;
+    scale: 1;
+}
+
+/* line follow styling on hover */
+.mobile_nav .page::after{
+    position:absolute;
+    bottom:-2px;
+    left: 1px;
+    content: "";
+    width: 0%;
+    background: beige;
+    height: 3px;
+    transition: all 0.5s ease;
+    scale: 1;
+}
+
+.mobile_nav .page:hover::after{
+    width: 100%;
+}
+.mobile_nav .page:hover{
+    scale: 1.2;
+}
+
+.mobile_nav.active{
+    display: flex;
+}
+
+/* new mobile navbar in header */
+.new-nav{
+    display:flex;
+    gap:40px;
+    justify-content: space-between;
+    display: none;
+}
+
+
+
+
+/* Loading animation styling */
+/* ----------------------------------------------------------------------------------------------------- */
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;    
+    left: 45%;
+}
+
+.dot{
+    width: 10px;
+    height: 10px;
+    background-color: #002852;
+    border-radius: 50%;
+    margin: 0 5px;
+    opacity: 0;
+    animation: bouncing-loader 0.6s infinite alternate;
+
+}
+
+
+@keyframes bouncing-loader {
+    to {
+        opacity: 0.1;
+        transform: translate3d(0, -1rem, 0);
+    }
+}
+
+
+
+
+
+
+/* Landing Page styling */
+/* --------------------------------------------------------------------------------------------------------------------------- */
+/* main or first section styling */
+#main-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: rgba(224, 224, 109, 0.441); */
+    width: 100%;
+    padding: 1rem;
+    height: 95vh;
+    margin: auto;
+}
+
+/* image styling */
+#main-section img{
+    width:min(40vw, 600px);
+    height: 40vw;
+}
+
+#main-section h2{
+    padding: 2rem;
+    font-size: 4.8rem;
+}
+
+#main-section p{
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 2.0rem;
+}
+
+/* styling for other sections */
+#sect2{
+    border-top: 1px solid black;
+    padding-top: 4rem;
+    background-color: rgba(0, 0, 0, 0.145);
+    
+    display: flex;
+}
+#latest{
+    margin: 1rem;
+    padding: 1rem;
+    height: fit-content;
+    width: 100%;
+    background:var(--sectclr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 18px;
+    
+}
+
+#shelf{
+    margin: 1rem;
+    padding: 1rem;
+    height: fit-content;
+    width: 100%;
+    background: var(--sectclr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    z-index: 0;
+    border-radius: 18px;
+}
+
+
+
+
+.section-title{
+    font-size: 2.6rem;
+}
+.section-text{
+    font-size: 1.3 rem;
+    font-weight: bold;
+}
+
+/* button styling for all sections */
+.access-button{
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 8px;
+    margin-top: 30px;
+    width: fit-content;
+    height: auto;
+    outline: 0;
+    border: 2px rgb(0, 0, 0) solid;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.423);
+}
+
+.access-button:hover{
+    cursor:pointer;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------- */
+/* search  bar styling */
+.searchbar-div{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+    display: none;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+    justify-content: center;
+    transition:all 0.2s ease;
+    z-index: 1;
+}
+.searchbar-div.search{
+    display: flex;
+}
+
+
+.searchbar{
+    background-color: rgb(253, 253, 162);
+    outline: none;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 1em;
+    color: black;
+    width: 80%;
+}
+.searchbar-div button{
+    outline: none;
+    border:1px solid black;
+    border-radius: 10px;
+    padding: 1em;
+    background-color: black;
+    color: rgb(253, 253, 162);
+}
+.searchbar-div button:hover{
+    background-color:rgb(253, 253, 162) ;
+    color:black;
+    cursor: pointer;
+}
+
+.search-not-found{
+    position: fixed;
+    top: 50vh;
+    left:36vw;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.confirmation-div{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+}
+
+.confirmation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 0, 0.492);
+    border-radius: 10px;
+    border:black 1px solid;
+    padding: 4rem;
+    width: fit-content;
+}
+
+.confirmation button{
+    margin: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    font-size: 20px;
+    padding: 0.6rem;
+    border: 1px solid black;
+    outline: none;
+}
+
+.confirmation button:hover{
+    background-color: black;
+    color:beige;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+.confirmation-div.show-confirmation{
+    display: flex;
+}
+
+
+
+/* Media query setup */
+/* ----------------------------------- */
+/* fix a bug in responsiveness */
+
+
+/* sets properties once width is below 760px */
+@media (min-width:760px){
+    .mobile_nav{
+        display:none;
+    }
+}
+@media (max-width:760px) {
+    .mobile_nav{
+        display:none;
+    }
+    .navbar{
+        display: none;
+    }
+    .new-nav{
+        display: flex;
+    }
+
+    .menu-icon{
+        display: block;
+    }
+    
+    #main-section{
+        height:100vh;
+    }
+    #main-section p{
+        padding: auto;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    #main-section h2{
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 2.6rem;
+    }
+    .section-title{
+        font-size:2rem;
+    }
+    .section-text{
+        font-size: 1rem;
+    }
+    .show-nav{
+        display: flex;
+    }
+}
+
+/* more responsiveness for lower widths */
+@media (max-width:520px){
+    .mobile_nav{
+        right: 2px;
+        width: 40%;
+        padding: 1rem;
+        margin: auto;
+    }
+    .mobile_nav a{
+        width: fit-content;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+        font-size: 1rem;
+        word-wrap: break-word;
+    }
+    .loading-dots{
+        left: 40%;
+    }
+    #main-section{
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin: auto;   
+        width: 100%;
+        height: 100vh;
+    }
+
+    #main-section img{
+            width: 50vw;
+            height: auto;
+        }
+    #sect2{
+        flex-direction: column;
+        margin: 0;
+    }
+    #latest{
+        width: fit-content;
+        transform: translate(0%);
+    }
+    #shelf{
+    width: fit-content;
+        transform: translate(0%);
+    }
+
+    #share{
+        width: fit-content;
+        transform: translateY(0%);
+    }
+    
+}
+
+/* media query for extremely low width */
+@media (max-width:350px){
+    .searchbar-div{
+        flex-direction: column;
+    }
+    .back-to-shelf{
+        display: none;
+    }
+    .nav-title{
+        font-size: 12px;
+    }
+    
+    .mobile_nav{
+        width: fit-content;
+    }
+    #main-section img{
+            width: 60vw;
+            height: auto;
+        }
+
+    #main-section h2{
+        font-size: 28px;
+        width: 80vw;
+        padding: 0;
+        }
+
+    #main-section p{
+        padding: 0;
+        padding-top: 15px;
+        text-align: left;
+        width: 80vw;
+        }
+        
+    .searchbar{
+        height: 36px;
+    }
+    .searchbar-div button{
+        height: 36px;
+    }
+}

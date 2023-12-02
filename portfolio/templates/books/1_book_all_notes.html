@@ -1,0 +1,27 @@
+{% extends 'books/notes_layout.html' %}
+
+
+{% block section %}
+    <div class="book-notes-div">
+        <div class="note-title">
+            <img src="{{book.imageLink}}" alt="book cover">
+            <h3>{{book.title}}</h3>
+        </div>
+
+        <h2>Notes: </h2>
+        {% for note in book_notes %}
+            <div class="book-notes">
+                <div>
+                    <h3>Title: {{note.title}}</h3>
+                <p>{{note.content}}</p>
+                </div>
+                <div class="book-note-buttons">
+                    <a href="{% url 'edit_note_render' note.id %}"><button>Edit</button></a>
+                    <a class="delete-note" id="{{note.id}}"><button>Delete</button></a>
+                </div>
+            </div>
+        {% endfor %}
+            
+    </div>
+{% endblock section %}
+    

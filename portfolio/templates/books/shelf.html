@@ -1,0 +1,149 @@
+{% extends 'books/layout.html' %}
+
+
+{% block body %}
+    <div class="shelf-main">
+        <div class="shelf-listing">
+
+<!-- collection bar  -->
+            <div class="collection-tab">
+                <h3>Collections</h3>
+                {% for collection in collections %}
+                    <a href="{% url 'collections' collection.id %}">{{collection.name|title}}</a>
+                {% endfor %}
+                <svg class="add-collection" width="30" height="30" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                </svg>
+                {% if collections %}
+                    <svg class="remove-collection" width="30" height="30" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.5 5v17h15V5h-15Z"></path>
+                        <path d="M10 10v6.5"></path>
+                        <path d="M14 10v6.5"></path>
+                        <path d="M2 5h20"></path>
+                        <path d="m8 5 1.645-3h4.744L16 5H8Z"></path>
+                    </svg>
+                
+                    <div class="removeCollectionMenu">
+                        {% for collection in collections %}
+                            <a href="{% url 'removeFromCollection' collection.id %}">{{collection.name|title}}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+            </div>
+
+
+
+<!-- Top bar with title  -->
+            <div class="topbar">
+                <div class="top-tab">
+                    <h1>Shelf!</h1>
+                    <div class="shelf-status">
+                        <h4>Your Shelf is </h4>
+                        {% if public %}
+                            <button class="private-public-toggle">Public</button>
+                        {% else %}
+                            <button class="private-public-toggle">Private</button>
+                        {% endif %}
+                    </div>
+                    <div class="community-shelf">
+                        <a href="{% url 'publicShelf' %}"><button>Shelf Community</button></a>
+                    </div>
+                </div>
+            </div>
+
+<!-- Tab for switching view state  -->
+            <div class="tab-section">
+                <ul>
+                    <li id="all-shelf-button">All</li>
+                    <li id="not_started-shelf-button">Not Started</li>
+                    <li id="reading-shelf-button">Currently Reading</li>
+                    <li id="finished-shelf-button">Finished</li>
+                </ul>
+            </div>
+
+
+<!-- one page setup  -->
+<!-- all books in shelf section  -->
+            
+            
+            <div class="all-books-shelf" id="shelf-list">
+                {% if not all %}
+                    <h1>No Books in Shelf</h1>
+                {% endif %}
+                {% for book in all %}                        
+                    <div class="shelf-book-item" id="{{ book.book_id }}" >
+                        <img src="{{ book.imageLink }}" alt="book cover">
+                        <a href="{% url 'view_book' book.book_id %}">
+                            <h3>{{ book.title|truncatewords:4 }}</h3>
+                        </a>
+                        <svg class="shelf-more" width="35" height="35" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.345 4.017a42.253 42.253 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.66 40.66 0 0 1 0 9.445 3.734 3.734 0 0 1-3.296 3.26 42.123 42.123 0 0 1-9.31 0 3.734 3.734 0 0 1-3.296-3.26 40.652 40.652 0 0 1 0-9.444 3.734 3.734 0 0 1 3.295-3.26ZM12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <!-- books not started section  -->
+            <div class="all-books-shelf" id="not_started-shelf">
+                {% if not not_started %}
+                    <h1>No Books Found</h1>
+                {% endif %}
+                {% for book in not_started %}
+                    <div class="shelf-book-item" id="{{ book.book_id }}" >
+                        <img src="{{ book.imageLink }}" alt="book cover">
+                        <a href="{% url 'view_book' book.book_id %}">
+                            <h3>{{ book.title|truncatewords:4 }}</h3>
+                        </a>                        
+                        <svg class="shelf-more" width="35" height="35" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.345 4.017a42.253 42.253 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.66 40.66 0 0 1 0 9.445 3.734 3.734 0 0 1-3.296 3.26 42.123 42.123 0 0 1-9.31 0 3.734 3.734 0 0 1-3.296-3.26 40.652 40.652 0 0 1 0-9.444 3.734 3.734 0 0 1 3.295-3.26ZM12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- currently reading section  -->
+            <div class="all-books-shelf" id="reading-shelf">
+                {% if not reading %}
+                    <h1>No Books Currently Reading</h1>
+                {% endif %}
+                {% for book in reading %}
+                    <div class="shelf-book-item" id="{{ book.book_id }}" >
+                        <img src="{{ book.imageLink }}" alt="book cover">
+                        <a href="{% url 'view_book' book.book_id %}">
+                            <h3>{{ book.title|truncatewords:4 }}</h3>
+                        </a>
+                        <svg class="shelf-more" width="35" height="35" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.345 4.017a42.253 42.253 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.66 40.66 0 0 1 0 9.445 3.734 3.734 0 0 1-3.296 3.26 42.123 42.123 0 0 1-9.31 0 3.734 3.734 0 0 1-3.296-3.26 40.652 40.652 0 0 1 0-9.444 3.734 3.734 0 0 1 3.295-3.26ZM12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                {% endfor %}
+            </div>
+            
+
+            <!-- finished reading section  -->
+            <div class="all-books-shelf" id="finished-shelf">
+                {% if not finished %}
+                    <h1>No Finished Books</h1>
+                {% endif %}
+                {% for book in finished %}
+                    <div class="shelf-book-item" id="{{ book.book_id }}" >
+                        <img src="{{ book.imageLink }}" alt="book cover">
+                        <a href="{% url 'view_book' book.book_id %}">
+                            <h3>{{ book.title|truncatewords:4 }}</h3>
+                        </a>
+                        <svg class="shelf-more" width="35" height="35" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.345 4.017a42.253 42.253 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.66 40.66 0 0 1 0 9.445 3.734 3.734 0 0 1-3.296 3.26 42.123 42.123 0 0 1-9.31 0 3.734 3.734 0 0 1-3.296-3.26 40.652 40.652 0 0 1 0-9.444 3.734 3.734 0 0 1 3.295-3.26ZM12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+
+            
+        </div>
+    </div>
+{% endblock body %}

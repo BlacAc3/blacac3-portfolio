@@ -1,0 +1,30 @@
+{% extends 'books/layout.html' %}
+
+
+{% block body %}
+    <div class="book-listing">
+        <h1>{{title}}</h1>
+        <div class="all-books">
+            {% for book in books %}
+                <a class="book-item" href="{% url 'view_book' book.id %}">
+                    <img src="{{ book.imageLinks }}" alt="book cover">
+                    <div class="book-item-info-listing">
+                        <h3>Title:  {{ book.title|truncatewords:10 }}</h3>
+                        <h4 class="book-item-author" >Authors:  
+                            {% for author in book.authors %}
+                                {{author|truncatewords:8}},  
+                            {% endfor %}
+                        </h4>
+                        <p>{{book.description|truncatewords:60}}</p>
+                        <p><strong>Published At: </strong> {{book.publishedDate}}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        
+        {% if not books %}
+            <div class="search-not-found">Not Found!</div>
+        {% endif %}
+        
+    </div>
+{% endblock body %}

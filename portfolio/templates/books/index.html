@@ -1,0 +1,36 @@
+{% extends "books/layout.html" %}
+
+{% block body %}
+    <section id="main-section">
+        <div class="main-">
+            <h2>Love Reading?</h2>
+            <p>Organise your favorites books and share your shelves with your friends.</p>
+            <a href="#sect2"><button class="access-button">Read More</button></a>
+        </div>
+        <div>
+            <img src="https://cdn.pixabay.com/photo/2012/04/13/16/43/bookshelf-32811_1280.png" alt="organiser">
+        </div>
+        
+    </section>
+    
+    <section id="sect2">
+        <div id="latest">
+            <h2 class="section-title">Latest Releases</h2>
+            <p class="section-text" >Welcome to BookTracker - Discover New Reads! Our unique feature keeps your reading list fresh and exciting. 
+                                    Every visit to our homepage reveals a new set of the latest books, spanning various genres. 
+                                    Explore undiscovered gems, stay updated with the literary world's releases, and satisfy your curiosity effortlessly. 
+                                    Just refresh the page to see new book recommendations. Start your literary journey with BookTracker today!</p>
+            <a href="{% url 'latest_page' %}"><button class="access-button">Latest Ebooks</button></a>
+        </div>
+        <div id="shelf">
+            <h2 class="section-title" >Shelf</h2>
+            <p class="section-text" >   Introducing Custom Shelves - your personalized book organization tool at BookTracker. 
+                                        Create shelves, take notes, build collections, and update reading statuses effortlessly.
+                                        It's your literary sanctuary. Discover, sort, and remember with ease!</p>
+            <a href="{% url 'shelf_view' %}"><button class="access-button">My Shelf</button></a>
+        </div>
+    </section>
+
+    
+
+{% endblock %}

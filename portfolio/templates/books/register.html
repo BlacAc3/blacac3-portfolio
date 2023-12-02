@@ -1,0 +1,25 @@
+{% extends 'books/layout.html' %}
+{% load static %}
+
+
+{% block body %}
+    <div class="log-reg-body mirror">
+        <div class="log-reg-container">
+            <h2>Register</h2>
+            <p class="log-reg-error">{{mess}}</p>
+            <form method="post" action="{% url 'register_render' %}" class="log-reg-form">
+                {% csrf_token %}
+                <input class="input" type="text" name="username" placeholder="Username" value="{{username}}" required>
+                <input class="input" type="email" name="email" placeholder="Email" value="{{email}}" >
+                <input class="input" type="password" name="password" placeholder="Password" required>
+                <input class="input" type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <input class="log-reg-button" type="submit" value="Register">
+            </form>
+            <p class="not-log-reg">Already a User?</p>
+            <a class="log-reg-redirect" href="{% url 'login_render' %}"><div>Click to Login</div></a>
+        </div>
+
+        <img class="book-read reg-img" src="{% static 'books/reading-book-animate.svg' %}" alt="reading-book">
+
+    </div>
+{% endblock body %}

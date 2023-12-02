@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- --Links to CSS stylings and Javascript----------------------------------------------------------------------- -->
+
+        
+        <!-- link for main css style 👇 -->
+        <link rel="stylesheet" href="{% static 'books/style.css' %}">
+        <!-- link for login page css style👇 -->
+        <link rel="stylesheet" href="{% static 'books/login.css' %}">
+        <!-- link for viewing books page css styling 👇 -->
+        <link rel="stylesheet" href="{% static 'books/books.css' %}">
+        <!-- link for shelf page css styling 👇 -->
+        <link rel="stylesheet" href="{% static 'books/shelf.css' %}">
+        <!-- link for collection page styling  👇-->
+        <link rel="stylesheet" href="{% static 'books/collections.css' %}">
+        <!-- link for notes.html page styling 👇-->
+        <link rel="stylesheet" href="{% static 'books/notes.css' %}">
+        
+
+        <!-- link for javascript file👇  -->
+        <script type="module" src="{% static 'books/shelf.js' %}"></script>
+        <script type="module" src="{% static 'books/script.js' %}"></script>
+        <script type="module" src="{% static 'books/notes.js' %}"></script>
+        
+    <!-- ------------------------------------------------------------------------- -->
+    <title>Landing Page</title>
+</head>
+
+
+<header>
+<!-- title and navbar  -->
+<!-- ------------------------------------------------------------------------- -->
+    <a href="{% url 'index' %}" class="nav-title">Book Tracker</a>
+    <nav class="navbar">
+        <!-- search -->
+        <a class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
+                <g fill="#5c5c5c" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(3.55556,3.55556)"><path d="M31,11c-11.027,0 -20,8.973 -20,20c0,11.027 8.973,20 20,20c3.97417,0 7.67238,-1.17843 10.78906,-3.18555l12.9375,12.9375c1.664,1.664 4.36239,1.664 6.02539,0c1.664,-1.664 1.664,-4.36139 0,-6.02539l-12.9375,-12.9375c2.00712,-3.11668 3.18555,-6.8149 3.18555,-10.78906c0,-11.027 -8.973,-20 -20,-20zM31,19c6.616,0 12,5.384 12,12c0,6.616 -5.384,12 -12,12c-6.616,0 -12,-5.384 -12,-12c0,-6.616 5.384,-12 12,-12z"></path></g></g>
+            </svg>
+        </a>
+        <!-- user  -->
+        <a class="page" style="color: rgb(66, 120, 255); cursor:default;">{{user.username|title}}</a>
+        <!-- latest  -->
+        <a class="page" href="{% url 'latest_page' %}">Latest</a>
+        <!-- login and register  -->
+        {% if not user.is_authenticated %}
+            <a class="log" href="{% url 'login_render' %}">Login</a>
+            <a class="log" href="{% url 'register_render' %}">Register</a>
+        {% elif user.is_authenticated %}   
+        <!-- other tabs for features         -->
+            <a class="page" href="{% url 'shelf_view' %}">Shelf</a>
+            <a class="page" href="{% url 'notes' %}">Notes</a>  
+            <a class="page"href="https://forms.gle/Nd9885nP9PD7qACJ7" target="_blank">Request</a>
+            <a class="log" href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+            
+        
+    </nav>
+    
+<!--mobile responsiveness navbar with search button  -->
+<!-- ------------------------------------------------------------------------- -->
+    <nav class="new-nav">
+        <a class="search-button" >
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
+                <g fill="#5c5c5c" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(3.55556,3.55556)"><path d="M31,11c-11.027,0 -20,8.973 -20,20c0,11.027 8.973,20 20,20c3.97417,0 7.67238,-1.17843 10.78906,-3.18555l12.9375,12.9375c1.664,1.664 4.36239,1.664 6.02539,0c1.664,-1.664 1.664,-4.36139 0,-6.02539l-12.9375,-12.9375c2.00712,-3.11668 3.18555,-6.8149 3.18555,-10.78906c0,-11.027 -8.973,-20 -20,-20zM31,19c6.616,0 12,5.384 12,12c0,6.616 -5.384,12 -12,12c-6.616,0 -12,-5.384 -12,-12c0,-6.616 5.384,-12 12,-12z"></path></g></g>
+            </svg>
+        </a>
+    
+        <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+
+</header>
+
+<body id="body">
+
+<!-- navbar html code for mobile devices  -->
+<!-- ---------------------------------------------------------------------------------------- -->
+    <div class="mobile_nav">
+        <a class="page" href="{% url 'latest_page' %}">Latest</a>
+        {% if user.is_authenticated  %}
+            <a class="page" href="{% url 'shelf_view' %}">Shelf</a>
+            <a class="page" href="{% url 'notes' %}">Notes</a>
+            <a class="page"href="https://forms.gle/Nd9885nP9PD7qACJ7" target="_blank">Request</a>
+            <a class="page">{{user.username|title}}</a>
+            <a class="log" href="{% url 'logout' %}">Logout</a>
+        {% elif not user.is_authenticated %}
+            <a class="log" href="{% url 'register_render' %}">Register</a>
+        {% endif %}
+        
+    </div>
+
+<!-- main body for connected the various html documents via django template  -->
+<!-- --------------------------------------------------------------------------------------  -->
+    <div id="inner-body">
+    {% block body %}
+        
+    {% endblock %}
+    </div>
+
+<!-- loading animation -->
+<!-- --------------------------------------------------------------------------------------------  -->
+    <div class="loading-div">
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+<!-- search bar code  -->
+<!-- ------------------------------------------------------------------------------------------------------  -->
+    <form class="searchbar-div" method="post" >
+        {% csrf_token %}
+        <input class="searchbar" name="searchTerm" placeholder="Search!">
+        <div class="search-bar-div">
+            <button formaction="{% url 'book_search' %}" type="submit">Search by Title</button>
+            <button formaction="{% url 'author_search' %}" type="submit">Search by Author</button>
+        </div>
+    </form>
+
+<!-- Add collection input div  -->
+<!-- ------------------------------------------------------------------------------------------------------- -->
+    <form class="" id="collectionNameCreate" method="post" action="{% url 'createCollection' %}">
+        {% csrf_token %}
+        <input class="searchbar" name="collectionName" placeholder="Create a Collection">
+        <button type="submit">OK</button>
+        <div class="cancel-input-collection">
+            <svg width="46" height="46" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2 12C2 6.47 6.47 2 12 2s10 4.47 10 10-4.47 10-10 10S2 17.53 2 12Zm13.59 5L17 15.59 13.41 12 17 8.41 15.59 7 12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17Z" clip-rule="evenodd"></path>
+            </svg>
+        </div>
+    </form>
+
+<!-- confirmation div -->
+<!-- ------------------------------------------------------------------------- -->
+    <div class="confirmation-div">
+        <div class="confirmation">
+            <h2>Are You Sure?</h2>
+            <div>
+                <button id="yes-confirmation">Yes</button>
+                <button id="no-confirmation">No</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- popup menus  -->
+    <div class="book-menu-div list">
+        <ul class="book-menu">
+            <li id="book-status">Change read status</li>
+            <li id="menu-remove">Remove from Shelf</li>
+            <li id="add-to-collection">Add to Collection</li>
+            <li id="create-notes">Create Notes</li>
+        </ul>
+
+        <div class="add-collection-section-div">
+            <ul class="book-menu add-collection-section">
+                {% if not collections %}
+                    <li>You have no Collections!</li>
+                {% endif %}
+                {% for collection in collections %}
+                    <li class="collection_add_buttons" id="{{collection.id}}">{{collection.name|title}}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="cancel cancel-add-collection-section">
+                <svg width="46" height="46" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M2 12C2 6.47 6.47 2 12 2s10 4.47 10 10-4.47 10-10 10S2 17.53 2 12Zm13.59 5L17 15.59 13.41 12 17 8.41 15.59 7 12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17Z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="book-menu-div book-status-section-div">
+            <ul class="book-menu book-status-section">
+                <li id="menu-notStarted">Add to Not Started</li>
+                <li id="menu-current">Add to Currently Reading</li>
+                <li id="menu-finish">Add to Finished</li>
+                <div class="cancel cancel-book-status-section">
+                    <svg width="46" height="46" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2 12C2 6.47 6.47 2 12 2s10 4.47 10 10-4.47 10-10 10S2 17.53 2 12Zm13.59 5L17 15.59 13.41 12 17 8.41 15.59 7 12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17Z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </ul>
+        </div>
+        
+        
+        <div class="cancel-menu">
+            <svg width="46" height="46" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2 12C2 6.47 6.47 2 12 2s10 4.47 10 10-4.47 10-10 10S2 17.53 2 12Zm13.59 5L17 15.59 13.41 12 17 8.41 15.59 7 12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17Z" clip-rule="evenodd"></path>
+            </svg>
+        </div>
+    </div>
+
+    
+
+</body>
+
+
+
+
+</html>

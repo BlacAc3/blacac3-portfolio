@@ -1,0 +1,48 @@
+{% extends 'books/layout.html' %}
+
+{% block body %}
+    <div class="notes-page-div">
+        <div class="notes-side-bar-button">
+            Notes
+        </div>
+<!-- side bar for easily assessing notes   -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+        <section class="notes-side-bar">
+            
+            <ul>  
+                
+                {% if not creationMode %}
+                    <a href="{% url 'notes' %}"><button style="width: 100%;">Create Note</button></a>
+                {% endif %}
+                {% for note in notes %}
+                    <li>
+                        <div class="side-book-item">
+                            <a href="{% url 'viewNote' note.id %}">
+                                <h5>{{note.book.title}}</h5>
+                                <p>{{note.title}}</p>
+                                
+                            </a>
+                            <!-- <button >More</button> -->
+                            <svg class="more-notes-button" width="16" height="16" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m4.594 8.912 6.553 7.646a1.126 1.126 0 0 0 1.708 0l6.552-7.646c.625-.73.107-1.857-.854-1.857H5.447c-.961 0-1.48 1.127-.853 1.857Z"></path>
+                            </svg>
+                            <div class="more-notes-section">
+                                <a href="{% url 'edit_note_render' note.id %}" class="edit-note">Edit note</a>
+                                <a class="delete-note" id="{{note.id}}">Delete Note</a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+
+<!-- Notes section for different note single pages -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+        <section class="notes-page">
+            {% block section %}
+            
+            {% endblock section %}
+        </section>
+    </div>
+{% endblock body %}

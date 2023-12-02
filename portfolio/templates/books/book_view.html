@@ -1,0 +1,56 @@
+{% extends 'books/layout.html' %}
+
+
+{% block body %}
+    <div class="book-viewing" id="{{book.id}}">
+        <div class="image-and-button">
+            <img src="{{ book.imageLinks }}" alt="book cover">
+            
+            <div id="button-section">
+                <button class="shelfButton" id="remove-from-shelf">Remove from Shelf</button>
+                <button class="shelfButton" id="add-to-shelf">Add to Shelf</button>
+                <button  id="add-review">Add Review</button>
+            </div>
+            <form id="review-form" method="post" action="{% url 'add_review' book.id  %}">
+                {% csrf_token %}
+                <input type="text" placeholder="Review Title" name="reviewTitle" required>
+                <textarea type="text" placeholder="review" name="reviewContent" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <div class="title-and-info">
+            <h2>{{ book.title }}</h2>
+            <ul class="book-view-info">
+                
+                <li><strong>Pages: </strong>{{book.pageCount}}</li>
+                <li><strong>Authors:</strong> 
+                    
+                    {% for author in book.authors %}
+                        {{ author }},
+                    {% endfor %}       
+                </li>
+                <li><strong>Publisher:</strong> {{ book.publisher }}</li>
+                <li><strong>Published Date:</strong> {{ book.publishedDate }}</li>
+                <li><strong>Description:</strong> {{ book.description|safe }}</li>
+            </ul>
+            <div class="review-section">
+                <h3>Reviews</h3>
+
+                
+                {% if not reviews %}
+                    <div class="review">
+                        <h3>No Reviews Yet</h3>
+                    </div>
+                {% endif %}
+                    
+                {% for review in reviews %}
+                <div class="review" id="review">
+                    <h3>{{review.title}}</h3>
+                    <p>{{review.content}}</p>
+                    <p id="review-user-time">By <strong>{{review.user}}</strong>, At {{review.dateTime}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

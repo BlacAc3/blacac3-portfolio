@@ -1,0 +1,28 @@
+{% extends "books/layout.html" %}
+
+{% block body %}
+    <div class="users-shelves">
+        <div>
+            <h1 style="padding: 0.3em;border-bottom:solid 1px black; text-align: center; ">Our Shelves</h1>
+            <br><br>
+        </div>
+        {% for shelf in shelves %}
+            {% if currentUser != shelf.user %}
+                <div class="user-shelf-div">
+                    <p class="shelf-owner">Shelf by <strong>{{shelf.user.username|title}}:</strong></p>
+                    <div class="user-shelf all-books-shelf" style="display: flex;" >
+                        {% for book in shelf.user.my_books.all|dictsortreversed:"timestamp" %}  
+                            <a href="{% url 'view_book' book.book_id %}">
+                                <div class="shelf-book-item" id="{{ book.book_id }}" >
+                                    <img src="{{ book.imageLink }}" alt="book cover">
+                                    <h3>{{ book.title|truncatewords:4 }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

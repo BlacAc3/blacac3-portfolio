@@ -1,0 +1,94 @@
+.collection-div{
+    margin-top: 120px;
+}
+
+.collection-div h2{
+    border-bottom: 1px solid black;
+    padding:1rem 0.5rem;
+    
+
+}
+
+.shelf-collection-div{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.collection-book-item{
+    position: relative;
+    margin: 10px;
+    width:fit-content;
+}
+
+.shelf-collection-div h3{
+    width: 130px;
+    word-wrap: break-word;
+    padding: 0.1em;
+}
+
+.collection-more{
+    position:absolute;
+    top: 0;
+    right:0;
+}
+
+.collection-more:hover{
+    cursor:pointer;
+}
+.back-to-shelf{
+    position: fixed;
+    top: 75px;
+    left: 1px;
+    color:aliceblue;
+    background-color: black;
+    border-radius:10px;
+    padding: 0.5em;
+    
+}
+
+.no-content{
+    font-weight: bold;
+    padding: 2em;
+    font-size: 40px;
+}
+
+#white_theme{
+    background-color: beige;
+    color:black;
+    border: solid 1px black;
+}
+
+
+
+.remove-collection{
+    padding: .3em;
+    background-color: black;
+    color: beige;
+    border-radius: 8px;
+}
+
+.removeCollectionMenu{
+    display:none;
+    border: 1px solid black;
+    border-radius: 8px;
+    max-height: 100px;
+    gap :5px;
+    flex-direction: column;
+    padding: 0.5rem;
+    overflow-y:scroll;
+}
+
+.removeCollectionMenu::-webkit-scrollbar{
+    background-color: transparent;
+    width: 8px;
+}
+
+.removeCollectionMenu::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    background-color: black;
+}
+
+.removeCollectionMenu.removeCollectionMenuClose{
+    display:flex;
+}

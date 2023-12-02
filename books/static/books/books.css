@@ -1,0 +1,388 @@
+/* Styling for the list of books page */
+/* ------------------------------------------------------------------------ */
+/* styling for main container  */
+.book-listing{
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    padding-top: 0;
+    margin: auto;
+    margin-top: 0;
+    width: 100%;
+    height:auto;
+    z-index: 0;
+}
+
+/* styling for title of the page */
+.book-listing h1{
+    color: black;
+    padding:.7rem;
+    padding-bottom: 0;
+    font-size: 40px;
+    margin:0;
+    word-wrap: break-word;
+    border-bottom: 1px black solid;
+}
+
+/* styling for container containing list of books */
+.all-books{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width:100%;
+    padding: 1em;
+    
+}
+
+/* styling each book item */
+.book-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:transparent;
+    width:100%;
+    white-space: nowrap;
+}
+
+/* styling the title of each book item */
+.book-item h3{
+    color:black;
+    overflow: hidden;
+    text-align: center;
+    align-self: flex-start;
+    text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+    width:180px;
+}
+
+.book-item p{
+    display: none;
+}
+
+/* styling book cover   s image */
+.book-item img{
+    height: 220px;
+    width: 150px;
+    border-radius: 8px;
+    border: 1px black solid;
+}
+
+.book-item-author{
+    display: none;
+    word-wrap:break-word;
+
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* Media query */
+
+/* Media queries for high widths */
+@media (min-width:756px) {
+    .all-books{
+        display: flex;
+        flex-direction:column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    .book-item{
+        padding: 8px;
+        border-radius: 10px;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 10px;
+        white-space:wrap;
+        overflow: hidden;
+
+    }
+    .book-item:hover{
+        background-color: rgb(182, 207, 199);
+    }
+    .book-item h3{
+        font-size: 30px;
+        text-wrap: nowrap;
+        width: 100%;
+        text-align: left;
+        text-wrap: wrap;
+    }
+    
+    .book-item p{
+        display: block;
+        width: 100%;
+    }
+    .book-item-author{
+        font-size: 20px;
+        display: block;
+        width: 100%;
+        text-align: left;
+        text-wrap:wrap;
+    }
+    .book-item-info-listing{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width:672px){
+    .all-books{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .book-item img{
+        width: auto;
+        height: 100%;
+    }
+}
+
+@media (max-width:484px){
+    .book-viewing h1{
+        text-align: center;
+    }
+    
+    .all-books{
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        
+    }
+    .book-item{
+        padding:0;
+        width:100%;
+    }
+    .book-item img{
+        width: min(100%, 200px);
+        height: auto;
+    }
+    .book-item h3{
+        font-size:18px;
+    }
+
+}
+
+
+
+
+
+/* Styling for the book item view page  */
+/* -------------------------------------------------------------------------------------------------------------- */
+/* main page styling */
+.book-viewing{
+    width: 100%;
+    padding: 10px;
+    display:flex;
+    align-items: flex-start;
+    gap: 20px;
+    height:auto;
+}
+
+/* styling image and title container */
+.image-and-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width:200px;
+}
+
+/* styling the image */
+.image-and-button img{
+    height: 220px;
+    width: 150px;
+    border: 1px solid #000;
+    border-radius:18px;
+    
+}
+
+/* styling the title text of the book */
+
+
+
+/* styling the button section for add to shelf and favorites */
+#button-section{
+    border-radius: 10px;
+    width: fit-content;
+    margin:1rem 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    gap:10px;
+}
+
+#button-section button{
+    padding: 0.6em;
+    font-size: 20px;
+    outline: none;
+    background:transparent;
+    border: 2px solid black;
+    border-radius: 8px;
+    transition:all 0.2s ease;
+    display: flex;
+}
+
+#button-section .shelfButton{
+    display:none;
+}
+
+#button-section button:hover{
+    background-color: black;
+    color:white;
+    cursor: pointer;
+}
+
+.title-and-info{
+    padding-top: 9px;
+    width: 100%;
+}
+
+.title-and-info h2{
+    padding: 1rem;
+    padding-top: 0;
+    font-size: 38px;
+}
+
+/* stying for review section */
+#review-form{
+    display: none;
+    flex-direction: column;
+    gap:5px;
+}
+#review-form.show-review-form{
+    display:flex;
+}
+
+#review-form input, #review-form textarea{
+    outline:none;
+    width: 100%;
+    font-size: 14px;
+    padding: 0.5rem;
+}
+#review-form textarea{
+    height: 100px;
+    resize:none;
+
+}
+
+#review-form button{
+    padding: 0.5rem;
+    font-size:18px;
+    border:1px solid black;
+    transition: all 0.3s ease;
+
+}
+
+#review-form button:hover{
+    background-color: black;
+    color:beige;
+    border-radius: 5px;
+}
+
+.review-section{
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.review-section h3{
+    font-size: 24px;
+}
+
+.review{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 0.7rem;
+    background-color: rgb(182, 207, 199);
+}
+
+.review p{
+    word-wrap: break-word;
+}
+
+#review-user-time{
+    border-top: solid 1px rgb(149, 149, 149);
+    padding-top:2px ;
+    font-style: italic;
+}
+
+/* styling the other information about the book */
+.book-view-info{
+    /* background-color: rgba(228, 210, 119, 0.333); */
+    background-color: beige;
+    width: 98%;
+    border-radius: 20px;    
+    border:1px black solid;
+    padding: 1.5em;
+    margin-left:10px;
+    height: fit-content;
+    word-wrap:break-word;
+}
+
+/* styling the individual info provided like author, description ... */
+.book-view-info li{
+    color: rgb(62, 62, 62);
+    margin-bottom:8px;
+    list-style-type: none;
+    font-size:20px;
+}
+
+@media (max-width:900px){
+
+    .title-and-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #button-section{
+        width: fit-content;
+        display: flex;
+    }
+    #button-section button{
+        margin:0 10px;
+    }
+    .image-and-button{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width:540px){
+    .book-viewing{
+        flex-direction:column;
+        align-items: center;
+    }
+    #button-section button{
+        font-size: 16px;
+        margin:0 5px;
+    }
+}
+@media (max-width:412px){
+    #review-form{
+        width: 100%;
+    }
+    #button-section button{
+        font-size: 15px;
+        margin:0 2px;
+    }
+    .image-and-button{
+        height: fit-content;
+    }
+    .image-and-button img{
+        width: 100%;
+        height: auto;
+    }
+    .title-and-info h2{
+        font-size: 28px;
+    }
+    .title-and-info li{
+        font-size: 14px;
+    }
+
+    .review h3, .review p{
+        font-size: 15px;
+    }
+}
+
+

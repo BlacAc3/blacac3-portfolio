@@ -1,0 +1,22 @@
+{% extends 'books/layout.html' %}
+{% load static %}
+
+{% block body %}
+        <div class="log-reg-body">
+            <div class="log-reg-container mirror-log">
+                <h2>Login</h2>
+                <p class="log-reg-error">{{mess}}</p>
+                <form method="post" action="{% url 'login_render' %}" class="log-reg-form">
+                    {% csrf_token %}
+                    <input class="input" type="text" name="username" required>
+                    <input class="input" type="password" name="password" required >
+                    <input class="log-reg-button" type="submit" value="Login">
+                </form>
+                <p class="not-log-reg">Not a User?</p>
+                <a class="log-reg-redirect" href="{% url 'register_render' %}"><div>Click to Register</div></a>
+            </div>
+
+            <img class="book-read log-img" src="{% static 'books/reading-book-animate.svg' %}" alt="reading-book">
+
+        </div>
+{% endblock body %}

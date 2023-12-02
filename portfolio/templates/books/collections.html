@@ -1,0 +1,56 @@
+{% extends 'books/layout.html' %}
+
+
+{% block body %}
+    <div class=collection-div>
+        <h2>Collections</h2>
+
+        <div class="collection-tab ">
+            {% for collection in collections %}
+            
+            {% if collection_title == collection.name %}
+                <a id="white_theme" href="{% url 'collections' collection.id %}">{{collection.name|title}}</a>
+            {% else %}
+                <a href="{% url 'collections' collection.id %}">{{collection.name|title}}</a>
+            {% endif %}
+
+            {% endfor %}
+            <svg class="add-collection" width="30" height="30" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+            </svg>
+            <svg class="remove-collection" width="30" height="30" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 5v17h15V5h-15Z"></path>
+                <path d="M10 10v6.5"></path>
+                <path d="M14 10v6.5"></path>
+                <path d="M2 5h20"></path>
+                <path d="m8 5 1.645-3h4.744L16 5H8Z"></path>
+            </svg>
+            <div class="removeCollectionMenu">
+                {% for collection in collections %}
+                    <a href="{% url 'removeFromCollection' collection.id %}">{{collection.name|title}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% if mess %}
+            <div class="no-content">{{mess}}</div>
+        {% endif %}
+        <div class="shelf-collection-div">
+            {% for book in collection_books %}
+                <div class="shelf-book-item collection-book-item" id="{{ book.books.book_id }}" >
+                    <img src="{{ book.books.imageLink }}" alt="book cover">
+                    <a href="{% url 'view_book' book.books.book_id %}">
+                        <h3>{{ book.books.title }}</h3>
+                    </a>
+                    <svg class="shelf-more collection-more" width="35" height="35" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.345 4.017a42.253 42.253 0 0 1 9.31 0c1.713.192 3.095 1.541 3.296 3.26a40.66 40.66 0 0 1 0 9.445 3.734 3.734 0 0 1-3.296 3.26 42.123 42.123 0 0 1-9.31 0 3.734 3.734 0 0 1-3.296-3.26 40.652 40.652 0 0 1 0-9.444 3.734 3.734 0 0 1 3.295-3.26ZM12 7.007a.75.75 0 0 1 .75.75v3.493h3.493a.75.75 0 1 1 0 1.5H12.75v3.493a.75.75 0 0 1-1.5 0V12.75H7.757a.75.75 0 0 1 0-1.5h3.493V7.757a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            {% endfor %}
+        </div>
+
+        
+
+        <a class="back-to-shelf" href="{% url 'shelf_view' %}">Back To Shelf</a>
+    </div>
+{% endblock body %}

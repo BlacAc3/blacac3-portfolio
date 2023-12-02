@@ -1,0 +1,12 @@
+{% extends 'books/notes_layout.html' %}
+
+{% block section %}
+    <div class="note-view">
+        <a href="{% url 'book_notes' currentNote.book.book_id %}"><h3>Book: {{currentNote.book.title}}</h3></a>
+        <h4>Title: {{currentNote.title}}</h4>
+        <p>{{currentNote.content}}</p>
+        <a href="{% url 'edit_note_render'  currentNote.id %}"><button>Edit</button></a>
+        <a class="delete-note" id="{{currentNote.id}}"><button>Delete</button></a>
+    </div>
+{% endblock section %}
+    
