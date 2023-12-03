@@ -11,15 +11,20 @@ li{
 }
 
 a{
+    color:var(--accent-color);
     text-decoration: none;
-    color:black;
 }
+
+a:hover{
+    cursor: pointer;
+}
+
 
 :root:root {
     --primary-color: #595758;
     --accent-color: #F7996E;
-    --highlight-color: #F4F1BB;
-    --text-color: #E6EBE0;
+    --highlight-color:#82bcdc; 
+    --text-color: #d5d5d5;
     --cta-color: #9BC1BC;
 
     /* --primary-color:#7B6B43;
@@ -32,7 +37,10 @@ a{
 }
 
 body{
+    height: 100%;
+    background-size:cover;
     background-color: var(--primary-color);
+
 }
 
 /* nav styling */
@@ -53,6 +61,9 @@ nav{
 }
 
 #username{
+    display:  flex;
+    justify-content: center;
+    gap:10px;
     font-size: 20px;
     font-style: italic;
     font-weight: bold;
@@ -84,8 +95,9 @@ nav li{
     color: var(--cta-color);
     transition: all 0.5s ease;
 }
-nav li:hover{
+nav ul li:hover{
     color:var(--accent-color);
+    cursor: pointer;
 }
 
 
@@ -115,14 +127,46 @@ nav li:hover  .nav-num{
 
 /* Body Styling */
 /* ---------------------------------------------------------------------- */
-#intro{
-    border: 2px solid var(--accent-color);
+
+.main-main{
+    display: flex;
+    position: relative;
+}
+
+/* Intro section syling */
+.intro{
+    position: relative;
+    /* border: 2px solid var(--accent-color); */
     padding: 3rem;
     margin: auto;
     width: 70%;
     display:flex;
     flex-direction: column;
     gap: 26px;
+    transition:all ease 0.3s;
+}
+
+.intro::after{
+    text-align: right;
+    content:"Created By BlacAc3";
+    font-weight:bolder ;
+    color: var(--accent-color);
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:45%;
+    border-left: 2px solid transparent;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.intro::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 45%;
+    border-right: 2px solid transparent;
+    border-top: 2px solid var(--accent-color);
 }
 
 #intro-name{
@@ -132,20 +176,28 @@ nav li:hover  .nav-num{
     font-family:var(--courier-font);
 }
 
-#intro h2{
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.intro h2{
+    width: 80%;
+    font-family: 'Courier', Courier, monospace;
     font-size: 45px;
-    font-weight: bolder;
     color:var(--highlight-color);
 }
 
-#intro p{
+.intro h3{
+    width: 80%;
+    margin-top: 28px;
+    font-family: 'Courier', Courier, monospace;
+    font-size: 30px;
+    color:var(--highlight-color);
+}
+
+.intro p{
     color:var(--text-color);
     width: 50%;
     font-family:monospace;
 }
 
-#intro button{
+.intro button{
     font-family: var(--courier-font);
     padding: 0.9rem;
     margin-top: 10px;
@@ -156,7 +208,52 @@ nav li:hover  .nav-num{
     transition: all 0.3s ease;
 }
 
-#intro button:hover{
+.intro button:hover{
     color:var(--primary-color);
     background-color: var(--cta-color);
+}
+
+
+/* About Section styling */
+.about{
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.about p{
+    width: 100%;
+    font-size: 18px;
+}
+.about h3{
+
+    width: 100%;
+    text-align: center;
+    text-decoration: underline;
+}
+.about ul{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.about-me p{
+    width: 100%;
+    text-align: left;
+}
+
+/* Certificate Section styling */
+.cert{
+    gap:5px;
+    display: none;
+    align-items: center;
+}
+
+.cert h2{
+    font-size: 26px;
+}
+
+.cert img{
+    height: 60vh;
+    border-radius: 10px;
 }

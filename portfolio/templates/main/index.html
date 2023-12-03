@@ -1,12 +1,39 @@
 {% extends 'main/layout.html' %}
-
+{% load static %}
 
 {% block body %}
-    <ul id="intro">
+<div class="main-main">
+    <ul class="home intro">
         <li id="intro-name">Hi, my name is</li>
         <li><h2>Ezeala Aaron Chidindu.</h2></li>
         <li><h2>I am a Django Backend Web Developer.</h2></li>
         <li><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime excepturi laboriosam natus quisquam nisi pariatur mollitia? Sequi at quidem error praesentium.</p></li>
         <li><button>My Projects</button></li>
     </ul>
+    <ul class="about intro">
+        <h2>About Me</h2>
+        <ul class="about-me">
+            <li><p>Hello there! I'm Ezeala Aaron, a dedicated Web Developer with a focus on Django backend development and proficiency in JavaScript. Currently a student, I'm passionate about building robust and scalable web applications that provide exceptional user experiences.</p></li>
+        </ul>
+
+        <h3>My Expertise</h3>
+        <ul class="expertise">
+            <li><p><strong>Django Development:</strong> I have a solid foundation in Django, creating powerful web applications following best practices and coding standards.</p></li>
+            <li><p><strong>JavaScript Skills:</strong> Proficient in JavaScript, I build interactive and dynamic user interfaces to enhance overall user experience.</p></li>
+            <li><p><strong>Problem Solver:</strong> I enjoy tackling challenges and solving complex problems. I believe in writing clean, maintainable code that meets project requirements.</p></li>
+        </ul>
+
+        <h3>Academic Background</h3>
+        <ul>
+            <li><p>I have successfully completed my Harvard <a href="https://pll.harvard.edu/course/cs50s-web-programming-python-and-javascript" target="_blank">CS50w</a> Course (Web Programming with Python and Javascript) and received my <a class="nav-cert">cerificate</a></p></li>
+            <li><p>I am currently pursuing my Bachelors Degree at University of Lagos, Nigeria. While my primary focus is on language studies, I have also gained valuable insights into computer science principles, algorithms, and data structures as part of my academic journey.</p></li>
+        </ul>
+    </ul>
+
+    <ul class="cert intro">
+        <h2>My Certificate</h2>
+        <li><img src="{% static 'mainpage/CS50W.png' %}" alt="Certificate of Aaron"></li>
+    </ul>
+    
+</div>
 {% endblock body %}

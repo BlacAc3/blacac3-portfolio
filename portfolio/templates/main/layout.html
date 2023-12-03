@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="{% static 'mainpage/style.css' %}">
+    <script src="{% static 'mainpage/script.js' %}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body>
 
     <nav>
-        <div id="username">BlacAc3</div>
+        <a href="https://github.com/BlacAc3" target="_blank"><div id="username"><i class="fa fa-github"></i>BlacAc3</div></a>
         <ul>
-            <a href=""><li><div class="nav-num">01.</div>About</li><a href=""></a>
-            <a href=""><li><div class="nav-num">02.</div>Certificate</li></a>
-            <a href=""><li><div class="nav-num">03.</div>Experience</li></a>
-            <a href=""><li> <button>Resume</button></li></a>
+            <li class="nav-home"><div class="nav-num">01.</div>Home</li>
+            <li class="nav-about"><div class="nav-num">02.</div>About</li>
+            <li class="nav-cert"><div class="nav-num">03.</div>Certificate</li>
+            <li><button>Resume</button></li>
         </ul>
     </nav>
 
