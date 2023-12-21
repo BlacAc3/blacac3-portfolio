@@ -1,3 +1,7 @@
+// url parent setup for the main url
+const url_parent = "/projects/books"
+
+
 document.addEventListener("DOMContentLoaded", ()=> {
     const confirmationDiv=document.querySelector(".confirmation-div");
     const yes=document.querySelector("#yes-confirmation");
@@ -78,6 +82,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     let bookContainer = document.querySelector(".book-viewing");
     if (bookContainer){
         shelfCheck()
+        console.log("checked for book in shelf")
     }
 
 // button handler for viewing review Section
@@ -130,7 +135,7 @@ function shelfCheck(){
     
 
         //Fetch the url that leads to the views.py add view function 
-        fetch(`/shelf-check/?id=${bookContainerId}`, {
+        fetch(`${url_parent}/shelf-check/?id=${bookContainerId}`, {
             method: "GET",
         })
         .then(response=>response.json())
@@ -161,7 +166,7 @@ export function addToShelfFunction(bookContainerId) {
     let text = addToShelf.innerHTML;
     addToShelf.innerHTML="Adding..."
     //Fetch the url that leads to the views.py add view function 
-    fetch(`/add-to-shelf/?id=${bookContainerId}`, {
+    fetch(`${url_parent}/add-to-shelf/?id=${bookContainerId}`, {
         method: "GET",
     })
     .then(response=>response.json())
@@ -185,7 +190,7 @@ export function removeFromShelfFunction(bookContainerId) {
     let addToShelf= document.querySelector("#add-to-shelf")
     let removeFromShelf= document.querySelector("#remove-from-shelf")
     //Fetch the url that leads to the views.py add view function 
-    fetch(`/remove-from-shelf/?id=${bookContainerId}`, {
+    fetch(`${url_parent}/remove-from-shelf/?id=${bookContainerId}`, {
         method: "GET",
     })
     .then(response=>response.json())

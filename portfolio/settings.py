@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "ace_finance",
+    "myCLI",
     "mainpage",
     "books",
     'django.contrib.admin',

@@ -13,12 +13,27 @@
 
     <nav>
         <a href="https://github.com/BlacAc3" target="_blank"><div id="username"><i class="fa fa-github"></i>BlacAc3</div></a>
+
+        <!-- web nav view -->
         <ul>
             <li class="nav-home"><div class="nav-num">01.</div>Home</li>
             <li class="nav-about"><div class="nav-num">02.</div>About</li>
             <li class="nav-cert"><div class="nav-num">03.</div>Certificate</li>
             <li><button>Resume</button></li>
         </ul>
+        <!-- mobile nav icon  -->
+        <svg class="nav-menu" width="38" height="38" fill="#f7996e" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 8V6h18v2H3Zm0 5h18v-2H3v2Zm0 5h18v-2H3v2Z" clip-rule="evenodd"></path>
+        </svg>
+
+        <!-- mobile nav menu  -->
+        <ul class="mobile-nav">
+            <li class="nav-home">Home</li>
+            <li class="nav-about">About</li>
+            <li class="nav-cert">Certificate</li>
+            <li><button>Resume</button></li>
+        </ul>
+        
     </nav>
 
     {% block body %}

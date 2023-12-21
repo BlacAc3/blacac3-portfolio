@@ -1,0 +1,98 @@
+/* :root{
+    --backgroundclr:#1B262C;
+    --darker-backgroundclr:#262b2d;
+    --textclr:#BBE1FA;
+    --ctaclr:#0e3b59;
+    --primaryclr:#3282B8;
+} */
+
+
+#activities{
+    color:var(--textclr);
+    width: 100%;
+    display: flex;
+    flex-direction:column ;
+    gap:30px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#amount-activities{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--textclr);
+    background-color: var(--darker-backgroundclr);
+}
+
+#main-activities{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.sort-tab{
+    align-self:flex-start;
+    padding: 0.4rem;
+    border-radius:10px;
+    border: none;
+    width: 36%;
+    background-color: var(--textclr);
+    border: 2px solid var(--darker-backgroundclr);
+}
+
+.payments{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width: 100%;
+}
+
+.payments-card{
+    display:flex;
+    padding: 1rem;
+    background-color: var(--ctaclr);
+    justify-content: space-between;
+    align-items: center;
+    border-radius:12px;
+}
+.activities-card-info{
+    gap: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.activities-card-date{
+    font-size: 10px;
+}
+
+@media (min-width:480px) {
+    .sort-tab{
+        width: fit-content;
+    }
+    #amount-activities{
+        width: fit-content;
+        align-self: center;
+        margin-left: 1rem;
+    }
+}
+
+@media (min-width:1000px){
+    .payments-card{
+        width: 60%;
+        margin: auto;
+    }
+
+    .sort-tab{
+        margin: auto;
+    }
+}

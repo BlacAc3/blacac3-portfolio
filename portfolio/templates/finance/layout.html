@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'finance/style.css' %}">
+        <link rel="stylesheet" href="{% static 'finance/finance_activities.css' %}">
+        <link rel="stylesheet" href="{% static 'finance/cards.css' %}">
+        <link rel="stylesheet" href="{% static 'finance/beneficiaries.css' %}">
+        <link rel="stylesheet" href="{% static 'finance/profile.css' %}">
+        <script type="module" src="{% static 'finance/script.js' %}"></script>
+        <title>Finance App</title>
+    </head>
+
+
+    <body>
+        <nav>
+            <svg class="nav-menu-icon" width="46" height="46" fill="none" stroke="#99c1f1" stroke-linecap="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.75 7.5h16.5"></path>
+                <path d="M3.75 12h16.5"></path>
+                <path d="M3.75 16.5h16.5"></path>
+            </svg>
+            <h3>Ace Finance</h3>
+        </nav>
+        
+        <div id="main">
+            <section>
+                <ul id="sidebar-section">
+                    <h2>Overview</h2>
+                    <a href="{% url 'finance_index' %}"><li>My Account</li></a>
+                    <a href="{% url 'financial_activities' %}"><li>All Transactions</li></a>
+                    <a href="{% url 'credit_cards' %}"><li>Credit Cards</li></a>
+                    <a href="{% url 'beneficiaries' %}"><li>Beneficiaries</li></a>
+                    <a href="{% url 'finance_profile' %}"><li>My Profile</li></a>
+                </ul>
+            </section>
+            
+            <section  id="main-section">
+                {% block body %}
+                {% endblock %}
+            </section>
+        </div>
+
+
+    </body>
+</html>

@@ -1,4 +1,7 @@
 import { removeFromShelfFunction } from "./script.js";
+// url parent setup for the main url
+const url_parent = "/projects/books"
+
 document.addEventListener("DOMContentLoaded", ()=>{
 let bookItemInnerMenu=document.querySelector(".book-menu");
 const confirmationDiv=document.querySelector(".confirmation-div");
@@ -26,13 +29,12 @@ const no =document.querySelector("#no-confirmation");
     let privateButton=document.querySelectorAll(".private-public-toggle")
     privateButton.forEach((button)=>{
         button.addEventListener("click", ()=>{
-            let color = button.style.color;
-            let background=button.style.background;
+            let {color, background} = button.style;
             button.style.cursor="not-allowed";
             button.innerHTML="Loading...";
             button.style.color="black";
             button.style.background="yellow";
-            fetch("/shelf/make-public", {
+            fetch(`${url_parent}/shelf/make-public`, {
                 method:"GET",
             })
             .then(response=>response.json())
@@ -71,7 +73,7 @@ const no =document.querySelector("#no-confirmation");
         //add to notStarted
         let addToNotStarted = document.querySelector("#menu-notStarted");
         addToNotStarted.addEventListener("click", ()=>{
-            fetch(`/add-to-not-started/?id=${bookItemMenu.id}`, {
+            fetch(`${url_parent}/add-to-not-started/?id=${bookItemMenu.id}`, {
                 method:"GET",
             })
             .then(response=>response.json())
@@ -84,7 +86,7 @@ const no =document.querySelector("#no-confirmation");
         //add to reading button
         let addToReading = document.querySelector("#menu-current");
         addToReading.addEventListener("click", ()=>{
-            fetch(`/add-to-reading/?id=${bookItemMenu.id}`,{
+            fetch(`${url_parent}/add-to-reading/?id=${bookItemMenu.id}`,{
                 method:"GET",
             })
             .then(response=>response.json())
@@ -98,7 +100,7 @@ const no =document.querySelector("#no-confirmation");
         //add to finished button
         let addToFinished = document.querySelector("#menu-finish");
         addToFinished.addEventListener("click", ()=>{
-            fetch(`/add-to-finished/?id=${bookItemMenu.id}`,{
+            fetch(`${url_parent}/add-to-finished/?id=${bookItemMenu.id}`,{
                 method:"GET",
             })
             .then(response=>response.json())
@@ -116,7 +118,7 @@ const no =document.querySelector("#no-confirmation");
         collection_add_buttons.forEach(button=>{
             button.addEventListener("click", ()=>{
                 let collectionId=button.id
-                    fetch(`/add-to-col/?bookId=${bookItemMenu.id}&collectionId=${collectionId}`,{
+                    fetch(`${url_parent}/add-to-col/?bookId=${bookItemMenu.id}&collectionId=${collectionId}`,{
                     method: "GET",
                 })
                 .then(response =>response.json())
@@ -149,7 +151,7 @@ const no =document.querySelector("#no-confirmation");
             let createNoteButton = document.querySelector("#create-notes")
             if (createNoteButton){
                 createNoteButton.addEventListener("click",()=>{
-                    let url = `/my-notes/?bookId=${bookItemMenu.id}`
+                    let url = `${url_parent}/my-notes/?bookId=${bookItemMenu.id}`
                     window.location.href=url
                 })
             }

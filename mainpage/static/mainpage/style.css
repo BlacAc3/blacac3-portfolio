@@ -20,7 +20,7 @@ a:hover{
 }
 
 
-:root:root {
+:root {
     --primary-color: #595758;
     --accent-color: #F7996E;
     --highlight-color:#82bcdc; 
@@ -42,6 +42,9 @@ body{
     background-color: var(--primary-color);
 
 }
+button:hover{
+    cursor:pointer;
+}
 
 /* nav styling */
 /* ------------------------------------------------------------------------------------------------------------------------------- */
@@ -53,6 +56,7 @@ nav, nav ul, nav li, nav button{
     font-weight: bolder;
 }
 nav{
+    position: relative;
     background:transparent;
     padding: 1.3rem;
     gap:20px;
@@ -63,6 +67,7 @@ nav{
 #username{
     display:  flex;
     justify-content: center;
+    align-items: center;
     gap:10px;
     font-size: 20px;
     font-style: italic;
@@ -123,7 +128,44 @@ nav button:hover{
 nav li:hover  .nav-num{
     color:var(--cta-color);
 }
+.nav-menu{
+    display: none;
+}
 
+.mobile-nav{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10%;
+    right: 10px;
+    z-index: 2;
+    padding: 0.4rem;
+    background-color: var(--primary-color);
+    border:1px solid var(--accent-color); 
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    transform:translateY(-180%) ;
+}
+
+.mobile-nav-show{
+    transform: translateY(0%);
+}
+
+.mobile-nav li{
+    font-size: 18px;
+}
+
+.mobile-nav button{
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+.mobile-nav button:hover{
+    background-color: var(--cta-color);
+    border-color: var(--cta-color);
+}
 
 /* Body Styling */
 /* ---------------------------------------------------------------------- */
@@ -139,7 +181,9 @@ nav li:hover  .nav-num{
     /* border: 2px solid var(--accent-color); */
     padding: 3rem;
     margin: auto;
-    width: 70%;
+    height: fit-content;
+    overflow: hidden;
+    width: min(70%,100%);
     display:flex;
     flex-direction: column;
     gap: 26px;
@@ -148,7 +192,7 @@ nav li:hover  .nav-num{
 
 .intro::after{
     text-align: right;
-    content:"Created By BlacAc3";
+    content:"";
     font-weight:bolder ;
     color: var(--accent-color);
     position:absolute;
@@ -170,14 +214,13 @@ nav li:hover  .nav-num{
 }
 
 #intro-name{
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: bold;
     color:var(--accent-color);
     font-family:var(--courier-font);
 }
 
 .intro h2{
-    width: 80%;
     font-family: 'Courier', Courier, monospace;
     font-size: 45px;
     color:var(--highlight-color);
@@ -223,7 +266,7 @@ nav li:hover  .nav-num{
 
 .about p{
     width: 100%;
-    font-size: 18px;
+    font-size: 12px;
 }
 .about h3{
 
@@ -244,9 +287,11 @@ nav li:hover  .nav-num{
 
 /* Certificate Section styling */
 .cert{
-    gap:5px;
+    gap:0px;
     display: none;
     align-items: center;
+    width: 100%;
+    
 }
 
 .cert h2{
@@ -255,5 +300,114 @@ nav li:hover  .nav-num{
 
 .cert img{
     height: 60vh;
+    border-radius: 20px;
+}
+
+.projects{
+    display: none;
+    
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+
+.projects li{
+    width: 200px;
+    border: 1px solid var(--accent-color);
+    background-color: var(--primary-color);
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.projects li:hover{
+    background-color: var(--accent-color);
+    scale: 1.01;
+    border: 0px;
     border-radius: 10px;
 }
+.projects li:hover h3, .projects li:hover p{
+    color: var(--primary-color);
+}
+
+.projects h3{
+    font-size: 20px;
+}
+
+.projects p{
+    width: 100%;
+    text-align:left;
+}
+
+.projects img{
+    width: 100%;
+}
+/* width media query */
+@media (max-width:1000px) {
+    .intro{
+        gap:10px;
+    }
+    .intro h2, .intro h3{
+        font-size: 33px;
+    }
+    .intro p{
+        width: 80%;
+    }
+}
+
+@media (max-width:785px) {
+    .intro{
+        width: fit-content;
+        margin: 1rem;
+    }
+}
+
+@media (min-width:601px) {
+    .mobile-nav{
+        transform: translateY(-180%);
+    }
+}
+
+@media (max-width:600px) {
+    nav ul{
+        display: none;
+    }
+
+
+    .nav-menu{
+        display: block;
+    }
+
+    .intro h2, .intro h3{
+        font-size: 20px;
+        width: 100%;
+    }
+    .intro p{
+        width: 100%;
+    }
+
+    .cert img{
+        height: auto;
+        width: 100vw;
+    }
+    
+}
+
+@media (max-width:400px) {
+    .intro h2, .intro h3{
+        font-size: 18px;
+    }
+    #username{
+        font-size: 12px;
+    }
+}
+@media (max-width:300px) {
+    .intro{
+        padding: 1rem;
+    }
+}
+
+
+
+
