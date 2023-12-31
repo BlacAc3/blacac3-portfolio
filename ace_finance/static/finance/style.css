@@ -29,6 +29,40 @@ body{
     background-color:var(--backgroundclr) ;
 }
 
+/* popup notification styling  */
+/* ------------------------------------------------------------------------------------  */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: #fff;
+    box-sizing: border-box;
+    animation: slideDown 0.5s ease-out;
+}
+
+.popup-container > div{
+    width: fit-content;
+    overflow: hidden;
+    margin-top: 1rem;
+    border-radius: 10px;
+    padding:0.5rem ;
+    background-color: var(--primaryclr);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
 
 /* nav styling   */
 /* ------------------------------------------------------------------------- */
@@ -103,21 +137,27 @@ body #main{
 
 
 /* main body styling */
+/* ----------------------------------------------------------------------------------------------------------------------------------- */
+
 /* card styling */
 .card-div{
-    padding: 1rem;
+    padding:0 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--textclr);
     gap:30px;
-    flex-wrap: wrap;
+    flex-direction:column;
+    width: 100%;
+    margin:0 2rem;
 }
+
+
 
 .card{
     padding: 1rem;
-    width: 350px;
-    height:200px;
+    width: 100%;
+    height:100%;
     border:1px solid black;
     background-color: var(--ctaclr);
     display:flex;
@@ -137,6 +177,23 @@ body #main{
     margin-bottom: auto;
     display:flex;
     justify-content:space-between;
+}
+
+.transactions-card ul{
+    display: flex;
+    gap:20px;
+    flex-direction:column;
+}
+
+.transactions-card li{
+    padding: 1rem;
+    border:1px solid black;
+    background-color: var(--backgroundclr);
+    transition: all 0.3s ease;
+}
+
+.card:hover.transactions-card li{
+    background-color: var(--ctaclr);
 }
 
 /* credit card creation and styling */
@@ -208,7 +265,8 @@ body #main{
 
 /* Beneficiary card styling */
 .beneficiary-card{
-    width: 250px;
+    height:fit-content;
+    width: 100%;
 }
 .beneficiary-card li{
     font-size: 12px;
@@ -255,9 +313,21 @@ body #main{
         display: flex;
     }
     
+    .card-div{
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+    
     .card{
         width: 100%;
+        height:100%;
     }
+    .card-div > a{
+        width: 100%;
+    }
+
+    
     .credit-card{
         width: 200px;
         height:130px ;
@@ -265,6 +335,9 @@ body #main{
         margin: 0;
         
     }
+    
+    
+    
     .credit-card-name-bank{
         display: flex;
         justify-content: space-between;
@@ -320,6 +393,9 @@ body #main{
 @media (max-width:378px){
     .card{
         font-size: 12px;
+    }
+    .card-div{
+        padding: 0;
     }
     .profile-details-div img{
         width:50px !important;

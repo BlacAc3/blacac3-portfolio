@@ -73,9 +73,10 @@ nav{
     font-style: italic;
     font-weight: bold;
     background-color:transparent;
-    padding: 0.5rem;
-    border: var(--cta-color) 1px solid;
-    border-radius: 10px;
+    padding: 1rem;
+    overflow: hidden;
+    border: var(--cta-color) 2px solid;
+    border-radius: 70% 50% 70% 50% ;
     color: var(--accent-color);
     transition:all 0.2s ease;
 }
@@ -86,6 +87,10 @@ nav{
     background-color:var(--accent-color) ;
     border-color: var(--accent-color);
 }
+
+
+
+
 
 
 
@@ -110,7 +115,7 @@ nav button{
     padding: 0.6rem;
     background-color: transparent;
     border:var(--accent-color) 0.16rem solid;
-    border-radius:5px;
+    border-radius:50% 80% 70% 70% ;
     text-align: center;
     color:var(--accent-color);
     transition:all 0.3s ease;
@@ -221,7 +226,7 @@ nav li:hover  .nav-num{
 }
 
 .intro h2{
-    font-family: 'Courier', Courier, monospace;
+    font-family: 'Lobster', sans-serif;
     font-size: 45px;
     color:var(--highlight-color);
 }

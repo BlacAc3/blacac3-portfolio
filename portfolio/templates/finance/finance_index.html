@@ -4,8 +4,8 @@
     <div class="card-div">
         <!--Transactions Section  -->
         <!-- ------------------------------------------------------- -->
-        <a href="{% url 'financial_activities' %}">
-            <ul class="card">
+        <a class="card transactions-card" href="{% url 'financial_activities' %}">
+            <ul >
                 <h3>All Transactions</h3>
                 <li><h4>Deposit:</h4> <p>$100,000</p></li>
                 <li><h4>Deposit:</h4> <p>$100,000</p></li>
@@ -15,65 +15,17 @@
         </a>
 
         
-        <!-- credit card  section  -->
-        <!-- ------------------------------------------------------- -->
-        <ul>
-            <a href="{% url 'credit_cards' %}" class="credit-card">
-                <div class="credit-card-name-bank">
-                    <h3>CreditCard</h3><h3>AceBank</h3>
-                </div>
-                <div class="chip-and-arrow">
-                    <svg  class="arrow-icon" fill="#99c1f1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m14 7-5 5 5 5V7Z"></path>
-                    </svg>
-                    <svg class="svg-icon chip-icon" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1280 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M0 875.776V134.752A135.136 135.136 0 0 1 134.72 0h1010.56A135.136 135.136 0 0 1 1280 134.72v741.056a135.136 135.136 0 0 1-134.72 134.72H134.72A135.136 135.136 0 0 1 0 875.808z" fill="#FF9800" /><path d="M1280 404.224v-67.392H875.776a67.552 67.552 0 0 1-67.36-67.36c0-37.056 30.336-67.36 67.36-67.36h33.696V134.72h-33.696a135.136 135.136 0 0 0-134.72 134.72 135.136 135.136 0 0 0 134.72 134.72h101.056v202.112h-101.056c-94.304 0-168.416 74.112-168.416 168.448 0 94.304 74.112 168.416 168.416 168.416h67.392v-67.392h-67.392c-57.28 0-101.024-43.776-101.024-101.024 0-57.28 43.776-101.056 101.024-101.056H1280v-67.392h-235.776v-202.08H1280zM404.224 606.304H303.168v-202.08h101.056a135.136 135.136 0 0 0 134.72-134.72 135.136 135.136 0 0 0-134.72-134.752H303.168v67.36h101.056c37.024 0 67.36 30.304 67.36 67.36a67.552 67.552 0 0 1-67.36 67.36H0v67.392h235.776v202.08H0v67.392h404.224c57.28 0 101.024 43.776 101.024 101.056 0 57.248-43.776 101.024-101.024 101.024h-67.392v67.392h67.392c94.304 0 168.416-74.112 168.416-168.416 0-94.336-74.112-168.448-168.416-168.448z" fill="#FFD54F" /></svg>
-                </div>
-                <div class="card-number">1234 5678 9012 3456</div>
-                <div class="date-and-mastercard-logo">
-                    <p class="valid-thru">Valid Thru</p>
-                    
-                    <div class="expiry-date">06/16</div>
-                    
-                    <svg class="mastercard-logo" height="35px" width="35px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 291.791 291.791" xml:space="preserve">
-                        <g>
-                            <path style="fill:#E2574C;" d="M182.298,145.895c0,50.366-40.801,91.176-91.149,91.176S0,196.252,0,145.895
-                                s40.811-91.176,91.149-91.176S182.298,95.538,182.298,145.895z"/>
-                            <path style="fill:#F4B459;" d="M200.616,54.719c-20.442,0-39.261,6.811-54.469,18.181l0.073,0.009
-                                c2.991,2.89,6.291,4.924,8.835,8.251l-18.965,0.301c-2.972,3-5.68,6.264-8.233,9.656H161.3c2.544,3.054,4.896,5.708,7.03,9.081
-                                h-46.536c-1.705,2.936-3.282,5.954-4.659,9.09h56.493c1.477,3.127,2.799,5.489,3.921,8.799h-63.76
-                                c-1.012,3.146-1.878,6.364-2.535,9.646h68.966c0.675,3.155,1.194,6.072,1.55,9.045h-71.884c-0.301,3-0.456,6.045-0.456,9.118
-                                h72.859c0,3.228-0.228,6.218-0.556,9.118h-71.847c0.31,3.091,0.766,6.127,1.368,9.118h68.856c-0.711,2.954-1.532,5.926-2.562,9.008
-                                h-63.969c0.966,3.118,2.143,6.145,3.428,9.099h56.621c-1.568,3.319-3.346,5.972-5.306,9.081h-46.691
-                                c1.842,3.191,3.875,6.236,6.081,9.154l33.589,0.501c-2.863,3.437-6.537,5.507-9.884,8.516c0.182,0.146-5.352-0.018-16.248-0.191
-                                c16.576,17.105,39.744,27.772,65.446,27.772c50.357,0,91.176-40.82,91.176-91.176S250.981,54.719,200.616,54.719z"/>
-                        </g>
-                    </svg>
-                </div>
-                <div class="cardholder-name">John Doe</div>
-            </a>
-        </ul>
 
         <!-- Beneficiaries Section  -->
         <!-- ------------------------------------------------------- -->
-        <a href="{% url 'beneficiaries' %}">
-            <ul class="card beneficiary-card">
+        <a class="card beneficiary-card" href="{% url 'beneficiaries' %}">
+            <ul>
                 <h3>Beneficiaries</h3>
                 <li><h3>Promise Chidinma</h3><p>210115001</p></li>
             </ul>
         </a>
         
 
-        <ul class="card profile-card">
-            <h3>Profile</h3>
-            <div class="profile-details-div">
-                <img style="background-size: cover; border-radius: 50%; width: 100px; height: 100px;" src="data:image/png;base64,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" alt="profile image">
-                <div class="profile-details">
-                    <h4>Ezeala Aaron Chidindu</h4>
-                    <p>Account Balance: </p>
-                    <p>$100,000</p>
-                </div>
-                
-            </div>
-        </ul>
+        
     </div>
 {% endblock %}

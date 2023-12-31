@@ -14,7 +14,24 @@
     </head>
 
 
+    <script>
+        function copyToClipboard(text){
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                console.log('Text copied to clipboard');
+                })
+                .catch((err) => {
+                console.error('Err or copying text: ', err);
+                });
+            };
+    </script>
     <body>
+        <!-- --Popup Notification--  -->
+        <div class="popup-container" id="topPopup">
+            <div>PopUp</div>
+        </div>
+        
+        <!-- Navbar section  -->
         <nav>
             <svg class="nav-menu-icon" width="46" height="46" fill="none" stroke="#99c1f1" stroke-linecap="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.75 7.5h16.5"></path>

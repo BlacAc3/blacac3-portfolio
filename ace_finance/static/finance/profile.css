@@ -39,7 +39,20 @@
     color:var(--textclr);
     border-radius: 10px;
     background-color: var(--darker-backgroundclr);
-    
+}
+
+.user-details .num{
+    color: black;
+    background-color:transparent;
+    border-radius: 1rem;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 22px;
+}
+
+.user-details .num:hover{
+    color:var(--textclr);
 }
 
 .user-info-div{
@@ -53,12 +66,33 @@
     width: 100%;
 }
 
+
+
+.account-number-card h4{
+    font-size: 15px;
+    text-align: left;
+}
+
 .user-info-card-title{
     margin-top: 30px;
 }
 
 .user-info-card .card{
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    color: var(--textclr);
+}
+
+.user-info-card .card li{
+    border: 1px solid black;
+    padding: 1rem;
+    background-color: var(--darker-backgroundclr);
+}
+
+.user-info-card .beneficiary-card{
+    gap:5px;
 }
 
 @media (min-width:900px){

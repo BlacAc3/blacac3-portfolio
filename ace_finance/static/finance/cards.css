@@ -8,7 +8,8 @@
 
 .card-page{
     display: flex;
-    flex-direction:column;
+    flex-direction:row;
+    flex-wrap: wrap;
     align-items: center;
     gap: 40px;
     width: 100%;
@@ -26,12 +27,16 @@
 }
 
 .card-page-list{
+    width: 100%;
     display: flex;
-    flex-direction:column;
+    justify-content: center;
+    flex-wrap: wrap;
     gap:20px;
+    transition: all 0.2s ease;
 }
 
 @media (min-width:800px){
+    
     .card-page-list{
         gap:3em;
         padding: 1rem;
