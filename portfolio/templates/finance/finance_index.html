@@ -2,6 +2,14 @@
 
 {% block body %}
     <div class="card-div">
+        <div class="amount-send-receive">
+            <h3 id="amount">$130,000</h3>
+            <div>
+                <a href="#" class="send-receive">Send</a>
+                <a href="#" class="send-receive">Receive</a>
+            </div>
+           
+        </div>
         <!--Transactions Section  -->
         <!-- ------------------------------------------------------- -->
         <a class="card transactions-card" href="{% url 'financial_activities' %}">

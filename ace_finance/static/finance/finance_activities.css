@@ -18,17 +18,7 @@
 }
 
 
-#amount-activities{
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-    padding: 2rem;
-    border-radius: 10px;
-    border: 1px solid var(--textclr);
-    background-color: var(--darker-backgroundclr);
-}
+
 
 #main-activities{
     width: 100%;

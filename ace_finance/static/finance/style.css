@@ -139,7 +139,54 @@ body #main{
 /* main body styling */
 /* ----------------------------------------------------------------------------------------------------------------------------------- */
 
+
+/* amount section with send and receive buttons  */
+/* ------------------------------------------------------------------------------------------------------------------- */
+.amount-send-receive{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+    width: 100%;
+}
+
+.amount-send-receive div{
+    align-self: flex-start;
+    display: flex;
+    gap:1rem;
+}
+
+#amount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--textclr);
+    background-color: var(--darker-backgroundclr);
+    width: fit-content;
+}
+
+
+
+.send-receive{
+    font-size: 24px;
+    padding: 0.5rem;
+    background-color: var(--ctaclr);
+    border-radius: 10px;
+    border: 1px solid var(--textclr);
+}
+
+.send-receive:hover{
+    background-color: var(--backgroundclr);
+}
+
+
+
+
 /* card styling */
+/* -------------------------------------------------------------------------------------------------------- */
 .card-div{
     padding:0 1rem;
     display: flex;
@@ -197,7 +244,7 @@ body #main{
 }
 
 /* credit card creation and styling */
-/* -------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
 .credit-card{
     color: beige;
     /* background-image:url(https://img.freepik.com/free-vector/flat-design-polygonal-background_23-2148900723.jpg); */
