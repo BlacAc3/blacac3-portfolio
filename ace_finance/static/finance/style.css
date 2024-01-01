@@ -21,6 +21,7 @@ a{
     --textclr:#BBE1FA;
     --ctaclr:#0e3b59;
     --primaryclr:#3282B8;
+    --primarytransparent:#3282b841;
 }
 
 body{
@@ -28,6 +29,20 @@ body{
     width: 100%;
     background-color:var(--backgroundclr) ;
 }
+
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Remove arrows in Chrome, Safari, Edge, and Opera */
+}
+
+/* Additional styles to control the appearance of the input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Remove arrows in Chrome, Safari, and Opera */
+    margin: 0; /* Additional margin styling if needed */
+}
+
 
 /* popup notification styling  */
 /* ------------------------------------------------------------------------------------  */
@@ -40,18 +55,24 @@ body{
     justify-content: center;
     align-items: center;
     width: 100%;
-    color: #fff;
+    color: #ffffff7f;
     box-sizing: border-box;
     animation: slideDown 0.5s ease-out;
 }
 
 .popup-container > div{
     width: fit-content;
+    font-size: 10px;
     overflow: hidden;
-    margin-top: 1rem;
+    margin: 1rem ;
     border-radius: 10px;
-    padding:0.5rem ;
-    background-color: var(--primaryclr);
+    padding:0.35rem 0.5rem ;
+    background-color: var(--primarytransparent);
+    backdrop-filter: blur(10px);
+}
+
+.showFlex{
+    display: flex;
 }
 
 @keyframes slideDown {
@@ -151,9 +172,9 @@ body #main{
 }
 
 .amount-send-receive div{
-    align-self: flex-start;
     display: flex;
-    gap:1rem;
+    justify-content: space-around;
+    width:100%;
 }
 
 #amount{
@@ -171,7 +192,7 @@ body #main{
 
 
 .send-receive{
-    font-size: 24px;
+    font-size: 14px;
     padding: 0.5rem;
     background-color: var(--ctaclr);
     border-radius: 10px;
@@ -435,6 +456,25 @@ body #main{
         width: fit-content;
         height: fit-content;
     }   
+}
+
+@media (min-width:500px){
+    .amount-send-receive div{
+        justify-content: center;
+        width: fit-content;
+        padding-top: 1rem;
+        gap:1rem;
+        align-self: flex-start;
+    }
+
+    .send-receive{
+        font-size: 20px;
+    }
+
+    .popup-container > div{
+        font-size: 18px;
+        padding: 0.7rem;
+    }
 }
 
 @media (max-width:378px){

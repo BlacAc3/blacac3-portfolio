@@ -14,18 +14,21 @@
             <div class="user-info-card">
 
                 <h3 class="user-info-card-title">Transaction history</h3>
-                <ul class="card">
-                    <h3>All Transactions</h3>
-                    <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                    <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                    <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                    <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                </ul>
+                <a class="card" href="{% url 'financial_activities' %}">
+                        <h3>All Transactions</h3>
+                        <li><h4>Deposit:</h4> <p>$100,000</p></li>
+                        <li><h4>Deposit:</h4> <p>$100,000</p></li>
+                        <li><h4>Deposit:</h4> <p>$100,000</p></li>
+                        <li><h4>Deposit:</h4> <p>$100,000</p></li>
+                </a>
+                
                 <h3 class="user-info-card-title">Beneficiaries</h3>
-                <ul class="card beneficiary-card">
-                    <h3>Beneficiaries</h3>
-                    <li><h3>Promise Chidinma</h3><p>210115001</p></li>
-                </ul>
+                <a class="card beneficiary-card" href="{% url 'beneficiaries' %}">
+                        <h3>Beneficiaries</h3>
+                        <li><h3>Promise Chidinma</h3><p>210115001</p></li>
+                        <li><h3>Promise Chidinma</h3><p>210115001</p></li>
+                </a>
+                
                 <h3></h3>
             </div>
         </div>
