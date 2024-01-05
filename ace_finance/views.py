@@ -8,9 +8,6 @@ def financial_activities(request):
     
     return render(request, "finance/activities.html")
 
-def credit_cards(request):
-    return render(request, "finance/credit_cards_page.html")
-
 def beneficiaries(request):
     return render(request, "finance/beneficiaries.html")
 

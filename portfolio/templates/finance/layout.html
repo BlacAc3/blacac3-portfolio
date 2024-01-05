@@ -8,7 +8,6 @@
         <!-- styles link  -->
         <link rel="stylesheet" href="{% static 'finance/style.css' %}">
         <link rel="stylesheet" href="{% static 'finance/finance_activities.css' %}">
-        <link rel="stylesheet" href="{% static 'finance/cards.css' %}">
         <link rel="stylesheet" href="{% static 'finance/beneficiaries.css' %}">
         <link rel="stylesheet" href="{% static 'finance/profile.css' %}">
         <link rel="stylesheet" href="{% static 'finance/modal_box.css' %}">
@@ -50,7 +49,6 @@
                     <h2>Overview</h2>
                     <a href="{% url 'finance_index' %}"><li>My Account</li></a>
                     <a href="{% url 'financial_activities' %}"><li>All Transactions</li></a>
-                    <a href="{% url 'credit_cards' %}"><li>Credit Cards</li></a>
                     <a href="{% url 'beneficiaries' %}"><li>Beneficiaries</li></a>
                     <a href="{% url 'finance_profile' %}"><li>My Profile</li></a>
 
@@ -74,13 +72,17 @@
                 </svg>
                 <h2>Transaction In Progress</h2>
                 <div class="modal-form-acc-no">
-                    <input required placeholder="Acc. Number" type="number">
+                    <input required placeholder="Acc. Number" type="number" name="accountNumber">
                     <p class="modal-small-text">Ezeala Aaron Chidindu</p>
                 </div>
                 
                 <div class="modal-form-amount">
-                    <input required placeholder="Amount" type="number">
+                    <input required placeholder="Amount" type="number" name="amount">
                     <p class="modal-small-text">Main Balance: $200,000</p>
+                </div>
+
+                <div class="modal-form-note">
+                    <textarea placeholder="Note" name="transactionNote" ></textarea>
                 </div>
                 
                 <div>
