@@ -40,23 +40,40 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     //popup for transaction
     let sendButton = document.querySelector(".send")
-    let modalContainer=document.querySelector(".modal-container-div")
+    let transactionModalContainer=document.querySelector(".transaction-box")
     if (sendButton){
         sendButton.addEventListener("click", ()=>{
             console.log("Send button Clicked")
-            modalContainer.style.display="flex";
+            transactionModalContainer.style.display="flex";
         })
     }
 
     //close transaction popup
-    let closeModal = document.querySelector(".modal-close-button")
-    if (closeModal){
-        closeModal.addEventListener("click", ()=>{
+    const closeModalTransaction = document.querySelector(".modal-close-button-transaction")
+        closeModalTransaction.addEventListener("click", ()=>{
             console.log("Closed transaction page")
-            modalContainer.style.display="none";
-        })
-    }
+            transactionModalContainer.style.display="none";
+            })
         
+
+    //close beneficiary popup
+    let beneficiaryModalContainer = document.querySelector(".beneficiaries-modal-container")
+    const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
+        closeModalBeneficiary.addEventListener("click", ()=>{
+            console.log("Closed Beneficiary page")
+            beneficiaryModalContainer.style.display="none";
+        })
+
+    // open beneficiary popup 
+    let benButton = document.querySelector("#beneficiaries-list a")
+    benButton.addEventListener("click", ()=>{
+        console.log("Opened Beneficiary page")
+            beneficiaryModalContainer.style.display="flex";
+    })
+    
+
+
+
     //show hide handler for login and registration page
     let logButton = document.querySelector("#log-section-button");
     let regButton = document.querySelector("#reg-section-button");
@@ -80,4 +97,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         })
     }
+
+    let benCards = document.querySelectorAll(".modal-beneficiaries .card")
+    benCards.forEach((card)=>{
+        card.addEventListener("click", ()=>{
+            let accNo = card.querySelector("p")
+            beneficiaryModalContainer.style.display="none";
+            let numberField = document.querySelector(".modal-form-acc-no input")
+            numberField.value=null
+            numberField.value=accNo.innerHTML;
+        })
+
+    })
 })

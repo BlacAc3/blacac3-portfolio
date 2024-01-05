@@ -63,18 +63,23 @@
             </section>
         </div>
 
-        <div class="modal-container-div">
+        <div class="modal-container-div transaction-box">
             
             
             <form class="modal-container" action="">
-                <svg class="modal-close-button" fill="#99c1f1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="modal-close-button modal-close-button-transaction" fill="#99c1f1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path>
                 </svg>
                 <h2>Transaction In Progress</h2>
                 <div class="modal-form-acc-no">
                     <input required placeholder="Acc. Number" type="number" name="accountNumber">
-                    <p class="modal-small-text">Ezeala Aaron Chidindu</p>
+                    <div id="beneficiaries-list">
+                        <p class="modal-small-text">Ezeala Aaron Chidindu</p>
+                        <a>Beneficiaries</a>
+                    </div>
                 </div>
+
+                
                 
                 <div class="modal-form-amount">
                     <input required placeholder="Amount" type="number" name="amount">
