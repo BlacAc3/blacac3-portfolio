@@ -26,6 +26,7 @@ a{
 
 body{
     margin: auto;
+    margin-top: 7rem;
     width: 100%;
     background-color:var(--backgroundclr) ;
 }
@@ -88,11 +89,16 @@ input[type="number"]::-webkit-outer-spin-button {
 /* nav styling   */
 /* ------------------------------------------------------------------------- */
 nav{
+    background:var(--backgroundclr);
+    position: fixed;
+    top: 0;
+    right: 0;
     width: 100%;
-    padding: 1rem;
+    padding: 0.6rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom:1px solid var(--textclr);
 
 }
 
@@ -101,7 +107,17 @@ nav svg:hover{
 }
 
 nav h3{
+    font-size: 20px;
     color: var(--textclr);
+    padding: 1rem;
+    border: 1px solid transparent;
+    transition:all 0.3s ease;
+    border-radius:10px;
+}
+
+nav h3:hover{
+    border:1px solid ;
+    background-color: var(--darker-backgroundclr);
 }
 
 
@@ -109,6 +125,7 @@ nav h3{
 /* body styling */
 /* ------------------------------------------------------------------------------------ */
 body #main{
+
     width: 100%;
     display: flex;
     padding: 1rem;

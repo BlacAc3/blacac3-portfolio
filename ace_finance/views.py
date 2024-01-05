@@ -16,3 +16,6 @@ def beneficiaries(request):
 
 def profile(request):
     return render(request, "finance/profile.html")
+
+def login_register(request):
+    return render(request, "finance/finance_login.html")

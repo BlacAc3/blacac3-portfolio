@@ -34,14 +34,20 @@
     border-radius: 50%;
     width: 100px;
 }
-.user-details p {
-    padding: 0.2rem;
-    color:var(--textclr);
-    border-radius: 10px;
-    background-color: var(--darker-backgroundclr);
+
+#num-div{
+    display: flex;
+    align-items: center;
+    color: black;
+    flex-direction: row ;
+    cursor: auto;
+    margin-top: 18px;
+}
+#num-div:hover{
+    background-color:var(--ctaclr);
 }
 
-.user-details .num{
+#num-div .num{
     color: black;
     background-color:transparent;
     border-radius: 1rem;
@@ -49,14 +55,20 @@
     cursor: pointer;
     user-select: none;
     font-size: 18px;
+    transition: all 0.3s ease;
 }
 
-.user-details .num:hover{
-    color:var(--textclr);
+
+
+#num-div .num:hover{
+    color:var(--primaryclr);
 }
 
 .user-info-div{
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 
 .user-info-card{

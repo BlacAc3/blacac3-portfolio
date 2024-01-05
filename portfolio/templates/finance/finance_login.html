@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="{% static 'finance/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'finance/finance_log_reg.css' %}">
+    <title>Login</title>
+</head>
+<body>
+
+    <!-- Navbar section  -->
+    <nav>
+        <a href="{% url 'finance_index' %}"><h3>Ace Finance</h3></a>
+    </nav>
+    
+    <section id="finance-log">
+        <h3 class="log-reg-title">Login</h3>
+        <form action="">
+            <input type="text" class="log-reg-input" placeholder="Username" required>
+            <input type="password" class="log-reg-input" placeholder="Password" required>
+            <div class="small-text-div">
+                <p class=" small-text ">New user?</p> 
+                <a class="small-text clickable" id="reg-section-button">Click Here to Register.</a>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        
+    </section>
+
+
+    <section id="finance-reg" class="hide">
+        <h3 class="log-reg-title">Register</h3>
+        <form action="">
+            <input name="username" type="text" class="log-reg-input" placeholder="Username" required>
+            <input name="email" type="email" class="log-reg-input" placeholder="Email" required>
+            <input name ="password" type="password" class="log-reg-input" placeholder="Password" required>
+            <input name="confirmPassword" type="password" class="log-reg-input" placeholder="Confirm Password" required>
+            <div class="small-text-div">
+                <p class="small-text">Already Registered? </p>
+                <a class="small-text clickable" id="log-section-button" >Click Here to Login.</a>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </section>
+
+
+</body>
+</html>

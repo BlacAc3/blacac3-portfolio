@@ -41,7 +41,7 @@
                 <path d="M3.75 12h16.5"></path>
                 <path d="M3.75 16.5h16.5"></path>
             </svg>
-            <h3>Ace Finance</h3>
+            <a href="{% url 'finance_index' %}"><h3>Ace Finance</h3></a>
         </nav>
         
         <div id="main">
@@ -53,6 +53,9 @@
                     <a href="{% url 'credit_cards' %}"><li>Credit Cards</li></a>
                     <a href="{% url 'beneficiaries' %}"><li>Beneficiaries</li></a>
                     <a href="{% url 'finance_profile' %}"><li>My Profile</li></a>
+
+                    <!-- change the url code to the conventional django urls like above in urls.py -->
+                    <a href="/projects/finance-app/login"><li>Log Out</li></a>  
                 </ul>
             </section>
             
@@ -72,12 +75,12 @@
                 <h2>Transaction In Progress</h2>
                 <div class="modal-form-acc-no">
                     <input required placeholder="Acc. Number" type="number">
-                    <h3>Ezeala Aaron Chidindu</h3>
+                    <p class="modal-small-text">Ezeala Aaron Chidindu</p>
                 </div>
                 
                 <div class="modal-form-amount">
                     <input required placeholder="Amount" type="number">
-                    <p>Main Balance: $200,000</p>
+                    <p class="modal-small-text">Main Balance: $200,000</p>
                 </div>
                 
                 <div>
