@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", ()=>{
 
-    // check if popup contains information 
-    const popupText =document.querySelector("#topPopup div")
-    if (popupText.innerHTML !== None){
-        let text = ""
-        showPopup(text)
-    }
     
     
     let navIcon = document.querySelector(".nav-menu-icon");
@@ -76,11 +70,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         //close beneficiary popup
         let beneficiaryModalContainer = document.querySelector(".beneficiaries-modal-container")
-        const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
-            closeModalBeneficiary.addEventListener("click", ()=>{
-                console.log("Closed Beneficiary page")
-                beneficiaryModalContainer.style.display="none";
-            })
+        if (closeModalBeneficiary){
+            const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
+                closeModalBeneficiary.addEventListener("click", ()=>{
+                    console.log("Closed Beneficiary page")
+                    beneficiaryModalContainer.style.display="none";
+                })
+            }z
     }
     
     
