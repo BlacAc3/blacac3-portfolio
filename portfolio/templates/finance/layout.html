@@ -53,7 +53,7 @@
                     <a href="{% url 'finance_profile' %}"><li>My Profile</li></a>
 
                     <!-- change the url code to the conventional django urls like above in urls.py -->
-                    <a href="/projects/finance-app/login"><li>Log Out</li></a>  
+                    <a href="{% url 'finance_login' %}"><li>Log Out</li></a>  
                 </ul>
             </section>
             
@@ -74,7 +74,7 @@
                 <div class="modal-form-acc-no">
                     <input required placeholder="Acc. Number" type="number" name="accountNumber">
                     <div id="beneficiaries-list">
-                        <p class="modal-small-text">Ezeala Aaron Chidindu</p>
+                        <p class="modal-small-text">...</p>
                         <a>Beneficiaries</a>
                     </div>
                 </div>

@@ -89,4 +89,4 @@ class Book_reviews(models.Model):
 class PublicShelf(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, related_name="public")
     def __str__(self):
-        return f"Shelf: {self.shelf} by user:{self.user.username}"
+        return f"Shelf: by user:{self.user.username}"

@@ -7,7 +7,12 @@
     <script type="module" src="{% static 'finance/script.js' %}"></script>
     <link rel="stylesheet" href="{% static 'finance/finance_log_reg.css' %}">
     <title>Login</title>
+    <script>
+        
+    </script>
 </head>
+
+
 <body>
 
     <!-- Navbar section  -->
@@ -16,10 +21,14 @@
     </nav>
     
     <section id="finance-log">
+
+        <h1>{{notification}}</h1>
         <h3 class="log-reg-title">Login</h3>
-        <form action="">
-            <input type="text" class="log-reg-input" placeholder="Username" required>
-            <input type="password" class="log-reg-input" placeholder="Password" required>
+        <form action="{% url 'finance_login' %}" method="post">
+            {% csrf_token %}
+            <input name="submit_type" type="hidden" value="login">
+            <input name="username" type="text" class="log-reg-input" placeholder="Username" required>
+            <input name="password" type="password" class="log-reg-input" placeholder="Password" required>
             <div class="small-text-div">
                 <p class=" small-text ">New user?</p> 
                 <a class="small-text clickable" id="reg-section-button">Click Here to Register.</a>
@@ -31,8 +40,10 @@
 
 
     <section id="finance-reg" class="hide">
-        <h3 class="log-reg-title">Register</h3>
-        <form action="">
+        <h3 class="log-reg-title">Register {{username}}</h3>
+        <form action="{% url 'finance_login' %}" method="post">
+            {% csrf_token %}
+            <input name="submit_type" type="hidden" value="register">
             <input name="username" type="text" class="log-reg-input" placeholder="Username" required>
             <input name="firstname" type="text" class="log-reg-input" placeholder="First name" required>
             <input name="surname" type="text" class="log-reg-input" placeholder="Surname" required>

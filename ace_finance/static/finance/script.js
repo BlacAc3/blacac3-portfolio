@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", ()=>{
+
+    // check if popup contains information 
+    const popupText =document.querySelector("#topPopup div")
+    if (popupText.innerHTML !== None){
+        let text = ""
+        showPopup(text)
+    }
+    
+    
     let navIcon = document.querySelector(".nav-menu-icon");
     let sidebar = document.querySelector("#sidebar-section");
     if (navIcon){
@@ -48,28 +57,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
         })
     }
 
-    //close transaction popup
-    const closeModalTransaction = document.querySelector(".modal-close-button-transaction")
-        closeModalTransaction.addEventListener("click", ()=>{
-            console.log("Closed transaction page")
-            transactionModalContainer.style.display="none";
-            })
-        
-
-    //close beneficiary popup
-    let beneficiaryModalContainer = document.querySelector(".beneficiaries-modal-container")
-    const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
-        closeModalBeneficiary.addEventListener("click", ()=>{
-            console.log("Closed Beneficiary page")
-            beneficiaryModalContainer.style.display="none";
-        })
-
     // open beneficiary popup 
     let benButton = document.querySelector("#beneficiaries-list a")
-    benButton.addEventListener("click", ()=>{
-        console.log("Opened Beneficiary page")
-            beneficiaryModalContainer.style.display="flex";
-    })
+    if (benButton){
+        benButton.addEventListener("click", ()=>{
+            console.log("Opened Beneficiary page")
+                beneficiaryModalContainer.style.display="flex";
+        })
+        
+
+        //close transaction popup
+        const closeModalTransaction = document.querySelector(".modal-close-button-transaction")
+            closeModalTransaction.addEventListener("click", ()=>{
+                console.log("Closed transaction page")
+                transactionModalContainer.style.display="none";
+                })
+            
+
+        //close beneficiary popup
+        let beneficiaryModalContainer = document.querySelector(".beneficiaries-modal-container")
+        const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
+            closeModalBeneficiary.addEventListener("click", ()=>{
+                console.log("Closed Beneficiary page")
+                beneficiaryModalContainer.style.display="none";
+            })
+    }
+    
     
 
 
@@ -99,14 +112,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 
     let benCards = document.querySelectorAll(".modal-beneficiaries .card")
-    benCards.forEach((card)=>{
-        card.addEventListener("click", ()=>{
-            let accNo = card.querySelector("p")
-            beneficiaryModalContainer.style.display="none";
-            let numberField = document.querySelector(".modal-form-acc-no input")
-            numberField.value=null
-            numberField.value=accNo.innerHTML;
-        })
+    if (benCards){
+        benCards.forEach((card)=>{
+            card.addEventListener("click", ()=>{
+                let accNo = card.querySelector("p")
+                let accName= card.querySelector("h3")
 
-    })
+                beneficiaryModalContainer.style.display="none";
+                let numberField = document.querySelector(".modal-form-acc-no input")
+                let nameField= document.querySelector("#beneficiaries-list p")
+                numberField.value=null
+                numberField.value=accNo.innerHTML;
+                nameField.innerHTML = accName.innerHTML;
+
+            })
+        })
+    }
 })
