@@ -54,11 +54,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // open beneficiary popup 
     let benButton = document.querySelector("#beneficiaries-list a")
     if (benButton){
+    
         benButton.addEventListener("click", ()=>{
             console.log("Opened Beneficiary page")
                 beneficiaryModalContainer.style.display="flex";
         })
         
+
 
         //close transaction popup
         const closeModalTransaction = document.querySelector(".modal-close-button-transaction")
@@ -70,13 +72,62 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         //close beneficiary popup
         let beneficiaryModalContainer = document.querySelector(".beneficiaries-modal-container")
+        const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
         if (closeModalBeneficiary){
-            const closeModalBeneficiary = document.querySelector(".modal-close-button-beneficiaries")
                 closeModalBeneficiary.addEventListener("click", ()=>{
                     console.log("Closed Beneficiary page")
                     beneficiaryModalContainer.style.display="none";
                 })
-            }z
+            }
+        
+        let numInput = document.querySelector(".modal-form-acc-no input")
+        let balanceInput = document.querySelector(".modal-form-amount input")
+        let sendMoneyButton = document.querySelector(".modal-container button")
+        let recipientName = document.querySelector("#beneficiaries-list p")
+        let balance_element = document.querySelector(".modal-form-amount a")
+        let balance = parseInt(balance_element.innerHTML)
+            
+        numInput.addEventListener("input", ()=>{
+                let {value} = numInput
+                fetch(`account-number/?q=${value}`, {
+                    method: 'GET',
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                })
+                .then (response=>response.json())
+                .then(data=>{
+                    console.log(data.username)
+                    
+                    if (data.username !== undefined){
+                        recipientName.innerHTML = data.username
+                        if ( balance !== 0 ){
+                            sendMoneyButton.style.display = "flex"
+                        }
+                        
+                    }
+
+                    if(data.username === undefined){
+                        recipientName.innerHTML = "..."
+                        sendMoneyButton.style.display="none"
+                    }
+                    
+                    
+
+                })
+        })
+        balanceInput.addEventListener("input", ()=>{
+            
+            if(balance >= balanceInput.value && recipientName.innerHTML !=="..." && balance !== 0){
+                sendMoneyButton.style.display="flex"
+                console.log(`${balance} is enough with your balance of ${balanceInput.value}`)
+            }else{ 
+                sendMoneyButton.style.display="none"
+                console.log(`${balance} is not enough`)
+            }
+
+        })
+        
     }
     
     

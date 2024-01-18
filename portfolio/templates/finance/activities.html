@@ -12,29 +12,23 @@
             </select>
 
             <div class="payments">
-                <div class="payments-card">
-                    <div class="activities-card-name">Oluwole Ventures</div>
-                    <div class="activities-card-info">
-                        <div class="activities-card-amount">$200</div>
-                        <div class="activities-card-date">12/12/23</div>
-                    </div>
-                </div>
+                {% for transaction in transactions %}
+                    <div class="payments-card">
+                        {% if current_user.username == transaction.recipient.user.username %}
+                            <div class="activities-card-name">{{transaction.sender.user.username}}</div>
+                            <div class="activities-card-info">
+                                <div class="activities-card-amount" style="color: rgb(0, 255, 0);">${{transaction.amount}}</div>
 
-                <div class="payments-card">
-                    <div class="activities-card-name">Oluwole Ventures</div>
-                    <div class="activities-card-info">
-                        <div class="activities-card-amount">$200</div>
-                        <div class="activities-card-date">12/12/23</div>
+                        {% elif current_user.username == transaction.sender.user.username %}
+                            <div class="activities-card-name">{{transaction.recipient.user.username}}</div>
+                            <div class="activities-card-info">
+                                <div class="activities-card-amount" style="color: rgb(176, 1, 1);">$-{{transaction.amount}}</div>
+                        {% endif %}
+                        
+                                <div class="activities-card-date">{{transaction.date_time.date}}</div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="payments-card">
-                    <div class="activities-card-name">Oluwole Ventures</div>
-                    <div class="activities-card-info">
-                        <div class="activities-card-amount">$200</div>
-                        <div class="activities-card-date">12/12/23</div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
 

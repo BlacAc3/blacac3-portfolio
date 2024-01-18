@@ -1,8 +1,11 @@
 from .models import *
+from itertools import chain
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect 
+from django.http import JsonResponse
+from django.db.models import Q
 import random
 
 
@@ -13,18 +16,32 @@ login_url = "/projects/finance-app/login/"
 # Create your views here.
 @login_required(login_url=login_url)
 def index(request):
-    user = request.user
-    user_set = user.account.first()
-    balance = user_set.balance
-    return render(request, "finance/finance_index.html",{
-        "balance":balance,
-    })
+    user=request.user
+    balance = user.account.first().balance
+    transactions= transactions_compiler(user)
     
+    return render(request, "finance/finance_index.html",{
+        "balance":int(balance),
+        "transactions":transactions,
+        "current_user":user
+    })
+
+#combines two querySets
+def transactions_compiler(user):
+    user_set = user.account.first()
+    sender_account=User_account.objects.get(user = user)
+    return Transaction_user.objects.filter(
+        Q(sender=sender_account) | Q(recipient=sender_account)
+    ).order_by("-date_time")
 
 @login_required(login_url=login_url)
 def financial_activities(request):
-    
-    return render(request, "finance/activities.html")
+    user=request.user
+    transactions = transactions_compiler(user)
+    return render(request, "finance/activities.html", {
+        "transactions":transactions,
+        "current_user":user,
+    })
 
 @login_required(login_url=login_url)
 def beneficiaries(request):
@@ -86,15 +103,11 @@ def login_register(request):
             username = request.POST.get("username")
             password = request.POST.get("password")
             userCheckUsername = User.objects.filter(username=username).exists()
-            userCheckPassword= User.objects.filter(username=username, password=password).exists()
             if not userCheckUsername:
                 return render(request, "finance/finance_login.html",{
                     "notification": "User Doesn't Exist",
                 })
-            elif userCheckUsername and not userCheckPassword:
-                return render(request, "finance/finance_login.html",{
-                    "notification": "Wrong Password",
-                })
+
             
 
             #if user already has an account in other projects add the user to this project account models so as to prevent errors
@@ -111,6 +124,7 @@ def login_register(request):
     return render(request, "finance/finance_login.html")
 
 
+#generate random account number
 def accountNumberGenerator():
     mode = "running"
     randNum= None
@@ -121,3 +135,74 @@ def accountNumberGenerator():
             mode="stopped"
     return randNum
 
+#check if account number exists
+def check_account_number(request):
+    #check balance
+    if request.method != "GET":
+        return
+    current_user=request.user
+    num = request.GET.get("q")
+    user_account= User_account.objects.filter(accountNumber=num).exists()
+    if not user_account:
+        return JsonResponse({"error":"Invalid Account Number"})
+    recipient_user_account = User_account.objects.get(accountNumber=num)
+    current_user_account=User_account.objects.get(user=current_user)
+    if current_user_account.user.username == recipient_user_account.user.username:
+        return JsonResponse({"error":"Invalid Number"})
+
+    return JsonResponse({"username":f"{recipient_user_account.user.username}", "user_balance":f"{current_user_account}"})
+
+
+#
+def send_money(request):
+    if request.method != "POST":
+        return redirect(index)
+    accountNumber = request.POST.get("accountNumber")
+    amount = request.POST.get("amount")
+    transactionNote = request.POST.get("transactionNote")
+    recipient = User_account.objects.get(accountNumber = accountNumber)
+    current_user=request.user
+    sender= User_account.objects.get(user=current_user)
+    recipientExists = User_account.objects.filter(accountNumber = accountNumber).exists()
+
+    #If account number is not valid
+    if not recipientExists:
+        return redirect(index)
+
+    #if sender account number is the same as the recipient account number
+    if recipient.accountNumber == sender.accountNumber:
+        return redirect(index)
+
+
+
+    #add to transactions
+    new_transaction = Transaction_user.objects.create(sender = sender,recipient = recipient ,amount = amount, note=transactionNote, transaction_id = create_transaction_id())
+    new_transaction.save()
+
+    
+    
+
+    #update sender's main balance
+    new_balance = int(sender.balance) - int(amount)
+    sender.balance = new_balance
+    sender.save()
+
+    #update receiver's balance
+    new_r_balance = int(recipient.balance) + int(amount)
+    recipient.balance = new_r_balance
+    recipient.save()
+
+    #add to beneficiaries
+    new_beneficiaries = Beneficiaries.objects.create(user_account=sender, beneficiary_user=recipient)
+    new_beneficiaries.save()
+    return redirect(index)
+
+def create_transaction_id():
+    mode = "running"
+    randNum= None
+    while mode == "running":
+        randNum = random.randint(10**20, (10**21)-1)
+        id_correct = Transaction_user.objects.filter(transaction_id=randNum).exists()
+        if not id_correct:
+            mode="stopped"
+    return int(randNum)

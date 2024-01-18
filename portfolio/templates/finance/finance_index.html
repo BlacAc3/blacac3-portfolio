@@ -3,7 +3,7 @@
 {% block body %}
     <div class="card-div">
         <div class="amount-send-receive">
-            <h3 id="amount">${{balance}}</h3>
+            <h3 id="amount">${{ balance }}</h3>
             <div>
                 <a href="#" class="send-receive send">Send</a>
                 <a href="#" class="send-receive receive">Receive</a>
@@ -15,10 +15,18 @@
         <a class="card transactions-card" href="{% url 'financial_activities' %}">
             <ul>
                 <h3>All Transactions</h3>
-                <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                <li><h4>Deposit:</h4> <p>$100,000</p></li>
-                <li><h4>Deposit:</h4> <p>$100,000</p></li>
+                {% for transaction in transactions %}
+                        <li>
+                            {% if current_user.username == transaction.recipient.user.username %}
+                                <h4>Received from {{transaction.sender.user.username|title}}</h4>
+                                <p style="color: rgb(84, 215, 84);">+${{transaction.amount}}</p>
+                            {% elif current_user.username == transaction.sender.user.username %}
+                                <h4>Sent to {{transaction.recipient.user.username|title}}</h4>
+                                <p style = "color:rgb(212, 55, 55)">-${{transaction.amount}}</p>
+                            {% endif %}
+                            
+                        </li>
+                {% endfor %}
             </ul>
         </a>
 
@@ -40,18 +48,12 @@
                 </svg>
                 <h2 id="open-beneficiary">Beneficiaries</h2>
                 <ul class="modal-beneficiaries">
+                    
                     <li class="card">
                         <h3>Ajhdvhldiyvsiudlice</h3>
                         <p>210115001</p>
                     </li>
-                    <li class="card">
-                        <h3>Ace</h3>
-                        <p>210001</p>
-                    </li>
-                    <li class="card">
-                        <h3>Ace</h3>
-                        <p>2101111001</p>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
