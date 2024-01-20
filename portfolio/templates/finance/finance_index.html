@@ -22,7 +22,7 @@
                                 <p style="color: rgb(84, 215, 84);">+${{transaction.amount}}</p>
                             {% elif current_user.username == transaction.sender.user.username %}
                                 <h4>Sent to {{transaction.recipient.user.username|title}}</h4>
-                                <p style = "color:rgb(212, 55, 55)">-${{transaction.amount}}</p>
+                                <p style = "color:rgb(212, 55, 55)">- ${{transaction.amount}}</p>
                             {% endif %}
                             
                         </li>

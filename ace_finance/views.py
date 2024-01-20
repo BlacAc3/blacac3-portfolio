@@ -10,25 +10,30 @@ import random
 
 
 
+def index_renderer(user, message):
+    balance = user.account.first().balance
+    transactions= transactions_compiler(user)
+    data={
+        "balance":int(balance),
+        "transactions":transactions,
+        "current_user":user,
+        "popup_message":message
+    }
+    return data
 
-
+index_url = "finance/finance_index.html"
 login_url = "/projects/finance-app/login/"
 # Create your views here.
 @login_required(login_url=login_url)
 def index(request):
     user=request.user
-    balance = user.account.first().balance
-    transactions= transactions_compiler(user)
     
-    return render(request, "finance/finance_index.html",{
-        "balance":int(balance),
-        "transactions":transactions,
-        "current_user":user
-    })
+    data = index_renderer(user, "Welcome to my banking app")
+    return render(request, index_url, data)
+
 
 #combines two querySets
 def transactions_compiler(user):
-    user_set = user.account.first()
     sender_account=User_account.objects.get(user = user)
     return Transaction_user.objects.filter(
         Q(sender=sender_account) | Q(recipient=sender_account)
@@ -153,36 +158,38 @@ def check_account_number(request):
     return JsonResponse({"username":f"{recipient_user_account.user.username}", "user_balance":f"{current_user_account}"})
 
 
-#
+#function that sends money
 def send_money(request):
     if request.method != "POST":
         return redirect(index)
     accountNumber = request.POST.get("accountNumber")
     amount = request.POST.get("amount")
     transactionNote = request.POST.get("transactionNote")
-    recipient = User_account.objects.get(accountNumber = accountNumber)
     current_user=request.user
     sender= User_account.objects.get(user=current_user)
     recipientExists = User_account.objects.filter(accountNumber = accountNumber).exists()
 
     #If account number is not valid
     if not recipientExists:
-        return redirect(index)
+        data = index_renderer(request.user, "Failed!, Check account number.")
+        return render(request, index_url, data)
+        
+    recipient = User_account.objects.get(accountNumber = accountNumber)
 
     #if sender account number is the same as the recipient account number
     if recipient.accountNumber == sender.accountNumber:
-        return redirect(index)
-
-
+        data = index_renderer(request.user, "Failed!, Invalid transaction.")
+        return render(request, index_url, data)
 
     #add to transactions
     new_transaction = Transaction_user.objects.create(sender = sender,recipient = recipient ,amount = amount, note=transactionNote, transaction_id = create_transaction_id())
     new_transaction.save()
 
-    
-    
-
     #update sender's main balance
+    if int(amount)>int(sender.balance):
+        data = index_renderer(request.user, "Insufficient Balance!")
+        return render(request, index_url, data)
+    
     new_balance = int(sender.balance) - int(amount)
     sender.balance = new_balance
     sender.save()
@@ -195,7 +202,8 @@ def send_money(request):
     #add to beneficiaries
     new_beneficiaries = Beneficiaries.objects.create(user_account=sender, beneficiary_user=recipient)
     new_beneficiaries.save()
-    return redirect(index)
+    data = index_renderer(request.user, "Sent! Successfully.")
+    return render(request, index_url, data)
 
 def create_transaction_id():
     mode = "running"

@@ -10,16 +10,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
             console.log("hidden")
         })
     }
-    
+    showPopup()
 
     function showPopup(text) {
+        
         const popup = document.getElementById('topPopup');
         const popupText =document.querySelector("#topPopup div")
-        popupText.innerHTML = text;
+        if(text){
+            popupText.innerHTML = text;
+        }
         popup.style.display = 'flex';
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000); // Adjust the time the popup is displayed (in milliseconds)
+        
+        
     }
     
     // display popup for account number click event 
@@ -89,7 +94,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             
         numInput.addEventListener("input", ()=>{
                 let {value} = numInput
-                fetch(`account-number/?q=${value}`, {
+                fetch(`/projects/finance-app/account-number/?q=${value}`, {
                     method: 'GET',
                     headers:{
                         "Content-Type":"application/json"
@@ -101,8 +106,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     
                     if (data.username !== undefined){
                         recipientName.innerHTML = data.username
-                        if ( balance !== 0 ){
+                        if ( balance !== 0 && balanceInput.value ){
                             sendMoneyButton.style.display = "flex"
+                            sendMoneyButton.setAttribute("type", "submit")
                         }
                         
                     }
@@ -110,6 +116,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     if(data.username === undefined){
                         recipientName.innerHTML = "..."
                         sendMoneyButton.style.display="none"
+                        sendMoneyButton.setAttribute("type", "button")
                     }
                     
                     
@@ -118,11 +125,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
         })
         balanceInput.addEventListener("input", ()=>{
             
-            if(balance >= balanceInput.value && recipientName.innerHTML !=="..." && balance !== 0){
+            if(balance >= balanceInput.value && recipientName.innerHTML !=="..." && balance !== 0 && balanceInput.value){
                 sendMoneyButton.style.display="flex"
+                sendMoneyButton.setAttribute("type", "submit")
                 console.log(`${balance} is enough with your balance of ${balanceInput.value}`)
             }else{ 
                 sendMoneyButton.style.display="none"
+                sendMoneyButton.setAttribute("type", "button")
                 console.log(`${balance} is not enough`)
             }
 

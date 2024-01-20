@@ -22,7 +22,7 @@
                         {% elif current_user.username == transaction.sender.user.username %}
                             <div class="activities-card-name">{{transaction.recipient.user.username}}</div>
                             <div class="activities-card-info">
-                                <div class="activities-card-amount" style="color: rgb(176, 1, 1);">$-{{transaction.amount}}</div>
+                                <div class="activities-card-amount" style="color: rgb(176, 1, 1);">- ${{transaction.amount}}</div>
                         {% endif %}
                         
                                 <div class="activities-card-date">{{transaction.date_time.date}}</div>

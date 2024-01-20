@@ -30,7 +30,11 @@
     <body>
         <!-- --Popup Notification--  -->
         <div class="popup-container" id="topPopup">
-            <div>PopUp</div>
+            {% if popup_message %}
+                <div>{{popup_message}}</div>
+            {% else %}
+                <div></div>
+            {% endif %}
         </div>
         
         <!-- Navbar section  -->
@@ -93,7 +97,7 @@
                 </div>
                 
                 <div>
-                    <button type="submit">Confirm!</button>
+                    <button >Confirm!</button>
                 </div>
             </form>
             
