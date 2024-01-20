@@ -23,7 +23,8 @@ def index_renderer(user, message):
         "beneficiaries":beneficiary_list,
         "transactions":transactions,
         "current_user":user,
-        "popup_message":message
+        "popup_message":message,
+        "user_account":user_account,
     }
     return data
 
@@ -65,11 +66,8 @@ def beneficiaries(request):
 @login_required(login_url=login_url)
 def profile(request):
     user = request.user
-    account = User_account.objects.get(user=user)
-    return render(request, "finance/profile.html", {
-        "user":user,
-        "account_number":account.accountNumber,
-    })
+    data=index_renderer(user, "Profile")
+    return render(request, "finance/profile.html", data)
 
 
 # Function that handles login, logout and registration 

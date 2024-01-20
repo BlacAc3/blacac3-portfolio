@@ -19,10 +19,10 @@
                         <li>
                             {% if current_user.username == transaction.recipient.user.username %}
                                 <h4>Received from {{transaction.sender.user.username|title}}</h4>
-                                <p style="color: rgb(84, 215, 84);">+${{transaction.amount}}</p>
+                                <p class="green-text">+${{transaction.amount}}</p>
                             {% elif current_user.username == transaction.sender.user.username %}
                                 <h4>Sent to {{transaction.recipient.user.username|title}}</h4>
-                                <p style = "color:rgb(212, 55, 55)">- ${{transaction.amount}}</p>
+                                <p class="red-text">-${{transaction.amount}}</p>
                             {% endif %}
                             
                         </li>

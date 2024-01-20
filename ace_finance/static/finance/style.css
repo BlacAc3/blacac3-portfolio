@@ -21,6 +21,12 @@ a{
 .copy-text:hover{
     color: var(--textclr);
 }
+.red-text{
+    color:rgb(212, 55, 55) ;
+}
+.green-text{
+    color:  rgb(84, 215, 84);
+}
 
 
 :root{
