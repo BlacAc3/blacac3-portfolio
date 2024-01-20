@@ -14,6 +14,14 @@ a{
     color: var(--textclr);
 }
 
+/* for all item that can be copied  */
+.copy-text{
+    transition:all 0.2s ease;
+}
+.copy-text:hover{
+    color: var(--textclr);
+}
+
 
 :root{
     --backgroundclr:#1B262C;

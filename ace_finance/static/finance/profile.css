@@ -61,9 +61,7 @@
 
 
 
-#num-div .num:hover{
-    color:var(--primaryclr);
-}
+
 
 .user-info-div{
     display: flex;

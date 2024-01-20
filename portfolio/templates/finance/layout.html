@@ -16,17 +16,6 @@
     </head>
 
 
-    <script>
-        function copyToClipboard(text){
-            navigator.clipboard.writeText(text)
-                .then(() => {
-                console.log('Text copied to clipboard');
-                })
-                .catch((err) => {
-                console.error('Err or copying text: ', err);
-                });
-            };
-    </script>
     <body>
         <!-- --Popup Notification--  -->
         <div class="popup-container" id="topPopup">
@@ -81,7 +70,7 @@
                     <input required placeholder="Acc. Number" maxlength="11" type="number" name="accountNumber">
                     <div id="beneficiaries-list">
                         <p class="modal-small-text">...</p>
-                        <a>Beneficiaries</a>
+                        <a href="{% url 'beneficiaries' %}">Beneficiaries</a>
                     </div>
                 </div>
 

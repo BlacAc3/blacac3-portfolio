@@ -21,7 +21,7 @@
             <div class="user-info-card">
                 <div class="card" id="num-div">
                     <h4>Account Number: </h4>
-                    <p class="num" onclick="copyToClipboard('{{account_number}}')">{{account_number}}</p>
+                    <p class="num copy-text" >{{account_number}}</p>
                 </div>
                 <h3 class="user-info-card-title">Transaction history</h3>
                 <a class="card" href="{% url 'financial_activities' %}">

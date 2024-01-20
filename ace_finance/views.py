@@ -7,27 +7,31 @@ from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.db.models import Q
 import random
+index_url = "finance/finance_index.html"
+login_url = "/projects/finance-app/login/"
 
 
 
+#This function returns important data needed to be rendered with the index page
 def index_renderer(user, message):
     balance = user.account.first().balance
-    transactions= transactions_compiler(user)
+    transactions= transactions_compiler(user)[:5]
+    user_account = User_account.objects.get(user=user)
+    beneficiary_list = user_account.beneficiaries.all()[:6]
     data={
         "balance":int(balance),
+        "beneficiaries":beneficiary_list,
         "transactions":transactions,
         "current_user":user,
         "popup_message":message
     }
     return data
 
-index_url = "finance/finance_index.html"
-login_url = "/projects/finance-app/login/"
+
 # Create your views here.
 @login_required(login_url=login_url)
 def index(request):
     user=request.user
-    
     data = index_renderer(user, "Welcome to my banking app")
     return render(request, index_url, data)
 
@@ -50,7 +54,12 @@ def financial_activities(request):
 
 @login_required(login_url=login_url)
 def beneficiaries(request):
-    return render(request, "finance/beneficiaries.html")
+    user=request.user
+    user_account = User_account.objects.get(user=user)
+    beneficiary_list = user_account.beneficiaries.all()
+    return render(request, "finance/beneficiaries.html", {
+        "beneficiaries":beneficiary_list,
+    })
 
 
 @login_required(login_url=login_url)
@@ -199,9 +208,11 @@ def send_money(request):
     recipient.balance = new_r_balance
     recipient.save()
 
-    #add to beneficiaries
-    new_beneficiaries = Beneficiaries.objects.create(user_account=sender, beneficiary_user=recipient)
-    new_beneficiaries.save()
+    #add to beneficiaries if the existing beneficiary doesn't already exist
+    if not Beneficiaries.objects.filter(user_account=sender, beneficiary_user=recipient).exists():
+        new_beneficiaries = Beneficiaries.objects.create(user_account=sender, beneficiary_user=recipient)
+        new_beneficiaries.save()
+
     data = index_renderer(request.user, "Sent! Successfully.")
     return render(request, index_url, data)
 
