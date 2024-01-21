@@ -57,7 +57,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let sendMoneyButton = document.querySelector(".modal-container button")
     let recipientName = document.querySelector("#beneficiaries-list p")
     let balance_element = document.querySelector("#amount p")
-    const balance = parseInt(balance_element.innerHTML)
+    let balance_element1 = document.querySelector(".modal-form-amount a")
+    let balance = 0
+    if (balance_element){
+        balance = parseInt(balance_element.innerHTML)
+    }
+    if (balance_element1){
+        balance = parseInt(balance_element1.innerHTML)
+    }
     function verifiedTransactionDetails(){
         console.log("Checking Account Number")
         let value = document.querySelector(".modal-form-acc-no input").value
@@ -114,8 +121,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
         sendButton.forEach(sendButton=>{
             let beneficiaryParent=sendButton.parentNode.parentNode
             let benParentText = beneficiaryParent.querySelector(".each-beneficiary-info-pin p")
+            let recipientNumber = undefined
             if (benParentText){
-                let recipientNumber = benParentText.textContent
+                recipientNumber = benParentText.textContent
             }
             sendButton.addEventListener("click", ()=>{
                 console.log("Send button Clicked")
@@ -141,9 +149,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
             
 
 
-        numInput.addEventListener("input", verifiedTransactionDetails())
+        numInput.addEventListener("input", ()=>{
+            verifiedTransactionDetails()    
+        })
         balanceInput.addEventListener("input", ()=>{
-            
             //The Below condition checks the following:
             //--The user main balance is more than or equal to the transaction amount inputed
             //--The recipient must be available in the system

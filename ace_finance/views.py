@@ -62,9 +62,8 @@ def beneficiaries(request):
     user=request.user
     user_account = User_account.objects.get(user=user)
     beneficiary_list = user_account.beneficiaries.all()
-    return render(request, "finance/beneficiaries.html", {
-        "beneficiaries":beneficiary_list,
-    })
+    data = index_renderer(user, "")
+    return render(request, "finance/beneficiaries.html", data)
 
 
 @login_required(login_url=login_url)
