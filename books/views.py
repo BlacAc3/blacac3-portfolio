@@ -1,25 +1,19 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.db import *
+from django.db import IntegrityError
 import random
 import re
 from . models import *
 from  .get_api_data import *
 
-#verify login decorator
-def login_required(func):
-    def is_user_authenticated(request):
-        user=request.user
-        return func(request) if user.is_authenticated else redirect ("login_render")
-    return is_user_authenticated
-
-
+login_url = "login_render"
 
 
 # Create your views here.
-@login_required
+@login_required(login_url=login_url)
 def index(request):
     user= request.user
     return render(request, "books/index.html",{
@@ -122,7 +116,7 @@ def view_book(request, book_id):
 
 #------------------------------------------------------------------------------------------------
 #render shelf page
-@login_required
+@login_required(login_url=login_url)
 def shelf_view(request):
     user=request.user
     user_shelfList=Book_shelf.objects.filter(user=user).order_by("-timestamp")
@@ -146,7 +140,7 @@ def shelf_view(request):
 
 # ------------------------------------------------------------------------------------------------------------------
 #Search by book function
-@login_required
+@login_required(login_url=login_url)
 def book_search(request):
     term=request.POST.get("searchTerm")
     books=get_books(term, 40, "relevance", "title")
@@ -157,7 +151,7 @@ def book_search(request):
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 #Search by author function
-@login_required    
+@login_required(login_url=login_url)    
 def author_search(request):
     term=request.POST.get("searchTerm")
     books=get_books(term, 40, "relevance", "author")
@@ -168,7 +162,7 @@ def author_search(request):
 
 # ----------------------------------------------------------------------------------------------------------
 # Creates a new collection based on the collection name provided in the request and saves it. 
-@login_required
+@login_required(login_url=login_url)
 def createCollection(request):  # sourcery skip: use-named-expression
     user=request.user
     collectionNameRaw=request.POST.get("collectionName")
@@ -183,7 +177,7 @@ def createCollection(request):  # sourcery skip: use-named-expression
     return redirect("shelf_view")
 
 
-@login_required
+@login_required(login_url=login_url)
 #add to collection function
 def addToCollection(request):  # sourcery skip: use-named-expression
     # assign variables 
@@ -233,7 +227,7 @@ def collection_view(request, collectionId):
     })
 
 # renders the note creation page with certain features as coded below
-@login_required
+@login_required(login_url=login_url)
 def notes_create(request):
     user=request.user
     all_books_title=Book_shelf.objects.filter(user=user).order_by("title")
@@ -270,7 +264,7 @@ def shelfSearch(user, term):
     return book_searchResult
 
 #this function creates a new note
-@login_required
+@login_required(login_url=login_url)
 def addNote(request):
     if request.method=="POST":
         user=request.user
@@ -351,7 +345,7 @@ def add_review(request,bookId):
     
 
 
-@login_required
+@login_required(login_url=login_url)
 def publicShelf(request):
     publicShelves=PublicShelf.objects.all()
     currentUser=request.user
