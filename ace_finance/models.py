@@ -6,7 +6,7 @@ from django.utils import timezone
 # Create your models here.
 class User_account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="account")
-    balance = models.BigIntegerField(default=0)
+    balance = models.BigIntegerField(default=1000)
     accountNumber = models.BigIntegerField(default=0) #Generate an account number for the user
     
     def __str__(self):

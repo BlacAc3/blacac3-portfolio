@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if(text){
             popupText.innerHTML = text;
         }
-        if (popupText.textContent){
+        if (popupText && popupText.textContent){
             popup.style.display = 'flex';
             setTimeout(() => {
                 popup.style.display = 'none';
@@ -56,11 +56,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let balanceInput = document.querySelector(".modal-form-amount input")
     let sendMoneyButton = document.querySelector(".modal-container button")
     let recipientName = document.querySelector("#beneficiaries-list p")
-    let balance_element = document.querySelector(".modal-form-amount a")
-    let balance = parseInt(balance_element.innerHTML)
+    let balance_element = document.querySelector("#amount p")
+    const balance = parseInt(balance_element.innerHTML)
     function verifiedTransactionDetails(){
+        console.log("Checking Account Number")
+        let value = document.querySelector(".modal-form-acc-no input").value
         recipientName.innerHTML = "..."
-        let {value} = numInput
         if (value){
             fetch(`/projects/finance-app/account-number/?q=${value}`, {
                 method: 'GET',
@@ -112,18 +113,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     if (sendButton){
         sendButton.forEach(sendButton=>{
             let beneficiaryParent=sendButton.parentNode.parentNode
-            if (beneficiaryParent){
-                let recipientNumber = beneficiaryParent.querySelector(".each-beneficiary-info-pin p").textContent
-                sendButton.addEventListener("click", ()=>{
-                    console.log("Send button Clicked")
-                    transactionModalContainer.style.display="flex";
-                    if (beneficiaryParent.className == "each-beneficiary"){
-                        console.log(recipientNumber)
-                        accountInput.value = recipientNumber
-                        verifiedTransactionDetails()
-                    }
-                })
+            let benParentText = beneficiaryParent.querySelector(".each-beneficiary-info-pin p")
+            if (benParentText){
+                let recipientNumber = benParentText.textContent
             }
+            sendButton.addEventListener("click", ()=>{
+                console.log("Send button Clicked")
+                transactionModalContainer.style.display="flex";
+                if (beneficiaryParent.className == "each-beneficiary"){
+                    console.log(recipientNumber)
+                    accountInput.value = recipientNumber
+                    verifiedTransactionDetails()
+                }
+            })
+            
         })
     }
 
