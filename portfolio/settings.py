@@ -27,7 +27,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
