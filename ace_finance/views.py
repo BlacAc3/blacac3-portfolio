@@ -14,9 +14,13 @@ login_url = "/projects/finance-app/login/"
 
 #This function returns important data needed to be rendered with the index page
 def index_renderer(user, message):
+    user_existence=User_account.objects.filter(user=user).exists()
+    if not user_existence:
+        newAccount = User_account.objects.create(user=user, accountNumber = accountNumberGenerator())
+        newAccount.save()
+    user_account = User_account.objects.get(user=user)
     balance = user.account.first().balance
     transactions= transactions_compiler(user)[:5]
-    user_account = User_account.objects.get(user=user)
     beneficiary_list = user_account.beneficiaries.all()[:6]
     data={
         "balance":int(balance),

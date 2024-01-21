@@ -112,18 +112,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
     if (sendButton){
         sendButton.forEach(sendButton=>{
             let beneficiaryParent=sendButton.parentNode.parentNode
-            let recipientNumber = beneficiaryParent.querySelector(".each-beneficiary-info-pin p").textContent
-            sendButton.addEventListener("click", ()=>{
-                console.log("Send button Clicked")
-                transactionModalContainer.style.display="flex";
-                if (beneficiaryParent.className == "each-beneficiary"){
-                    console.log(recipientNumber)
-                    accountInput.value = recipientNumber
-                    verifiedTransactionDetails()
-                }
-            })
+            if (beneficiaryParent){
+                let recipientNumber = beneficiaryParent.querySelector(".each-beneficiary-info-pin p").textContent
+                sendButton.addEventListener("click", ()=>{
+                    console.log("Send button Clicked")
+                    transactionModalContainer.style.display="flex";
+                    if (beneficiaryParent.className == "each-beneficiary"){
+                        console.log(recipientNumber)
+                        accountInput.value = recipientNumber
+                        verifiedTransactionDetails()
+                    }
+                })
+            }
         })
-        
     }
 
     // open beneficiary popup 
