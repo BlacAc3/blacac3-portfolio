@@ -26,3 +26,17 @@ class Transaction_user(models.Model):
     date_time = models.DateTimeField(default=timezone.now)
     transaction_id=models.CharField(max_length=100)
 
+class Notification(models.Model):
+    STATUS= [
+        ("read","Read"),
+        ("not_read","Not Read")
+    ]
+
+    noti_user_account = models.ForeignKey(User_account, on_delete=models.CASCADE, related_name="notifications")
+    notification_status= models.CharField(max_length=100, default ="not_read",choices=STATUS)
+    notification_title= models.TextField()
+    notification_details = models.TextField()
+
+    
+    
+
