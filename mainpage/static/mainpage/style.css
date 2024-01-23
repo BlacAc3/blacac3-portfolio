@@ -140,14 +140,14 @@ nav li:hover  .nav-num{
 .mobile-nav{
     display: flex;
     flex-direction: column;
-    gap:8px;
+    gap:0.2rem;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 10%;
     right: 10px;
     z-index: 2;
-    padding: 0.4rem;
+    padding: 0.6rem;
     background-color: var(--primary-color);
     border:1px solid var(--accent-color); 
     border-radius: 5px;
@@ -160,7 +160,8 @@ nav li:hover  .nav-num{
 }
 
 .mobile-nav li{
-    font-size: 18px;
+    margin-top: 18px;
+    font-size: 15px;
 }
 
 .mobile-nav button{
