@@ -73,7 +73,7 @@ nav{
     font-style: italic;
     font-weight: bold;
     background-color:transparent;
-    padding: 1rem;
+    padding: 0.5rem;
     overflow: hidden;
     border: var(--cta-color) 2px solid;
     border-radius: 70% 50% 70% 50% ;
@@ -367,11 +367,16 @@ nav li:hover  .nav-num{
         width: fit-content;
         margin: 1rem;
     }
+
+    
 }
 
 @media (min-width:601px) {
     .mobile-nav{
         transform: translateY(-180%);
+    }
+    #username{
+        padding: 1rem;
     }
 }
 
