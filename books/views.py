@@ -9,10 +9,14 @@ import re
 from . models import *
 from  .get_api_data import *
 
+from django.views.decorators.cache import cache_page
+
+
 login_url = "login_render"
 
 
 # Create your views here.
+@cache_page(60*15)
 @login_required(login_url=login_url)
 def index(request):
     user= request.user
@@ -99,6 +103,7 @@ def latest_books(request):
 
 # ---------------------------------------------------------------------------------
 # view the book details
+@cache_page(10)
 def view_book(request, book_id):
     user=request.user
     book_api_url=f"https://www.googleapis.com/books/v1/volumes/{book_id}"
@@ -119,7 +124,7 @@ def view_book(request, book_id):
 @login_required(login_url=login_url)
 def shelf_view(request):
     user=request.user
-    user_shelfList=Book_shelf.objects.filter(user=user).order_by("-timestamp")
+    user_shelfList=Book_shelf.objects.select_related("user").filter(user=user).order_by("-timestamp")
     not_started=Book_shelf.objects.filter(user=user, status="not_started").order_by("-timestamp")
     reading=Book_shelf.objects.filter(user=user, status="reading").order_by("-timestamp")
     finished=Book_shelf.objects.filter(user=user, status="finished").order_by("-timestamp")
@@ -212,6 +217,7 @@ def removeFromCollection(request, id):
     
 
 # view collections function 
+@cache_page(5)
 def collection_view(request, collectionId):
     user=request.user
     collection_name=Collection_name.objects.get(user=user, id=collectionId)
@@ -256,10 +262,7 @@ def shelfSearch(user, term):
     all_books_title=Book_shelf.objects.filter(user=user).order_by("title")
     book_searchResult=[]
     for book in all_books_title:
-        # title=book["title"]
-        # book_id=book["book_id"]
-        result=re.search(term, book.title, re.IGNORECASE)
-        if result:
+        if result := re.search(term, book.title, re.IGNORECASE):
             book_searchResult.append(book)
     return book_searchResult
 

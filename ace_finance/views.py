@@ -6,6 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect 
 from django.http import JsonResponse
 from django.db.models import Q
+
+#cache import
+#---
+from django.views.decorators.cache import cache_page
+#---
+
 import random
 index_url = "finance/finance_index.html"
 login_url = "/projects/finance-app/login/"
@@ -19,20 +25,18 @@ def index_renderer(user, message):
         newAccount = User_account.objects.create(user=user, accountNumber = accountNumberGenerator())
         newAccount.save()
     user_account = User_account.objects.get(user=user)
-    balance = user.account.first().balance
     transactions= transactions_compiler(user)[:5]
     beneficiary_list = user_account.beneficiaries.all()[:6]
-    data={
-        "balance":int(balance),
-        "beneficiaries":beneficiary_list,
-        "transactions":transactions,
-        "current_user":user,
-        "popup_message":message,
-        "user_account":user_account,
+    return {
+        "balance": int(user.account.first().balance),
+        "beneficiaries": beneficiary_list,
+        "transactions": transactions,
+        "current_user": user,
+        "popup_message": message,
+        "user_account": user_account,
     }
-    return data
 
-
+@cache_page(60*1)
 # Create your views here.
 @login_required(login_url=login_url)
 def index(request):
@@ -40,14 +44,14 @@ def index(request):
     data = index_renderer(user, "Welcome to my banking app")
     return render(request, index_url, data)
 
-
 #combines two querySets
 def transactions_compiler(user):
     sender_account=User_account.objects.get(user = user)
-    return Transaction_user.objects.filter(
+    return Transaction_user.objects.select_related("sender", "recipient").filter(
         Q(sender=sender_account) | Q(recipient=sender_account)
     ).order_by("-date_time")
 
+@cache_page(60*30)
 @login_required(login_url=login_url)
 def financial_activities(request):
     user=request.user
@@ -57,15 +61,14 @@ def financial_activities(request):
         "current_user":user,
     })
 
+@cache_page(60*1)
 @login_required(login_url=login_url)
 def beneficiaries(request):
     user=request.user
-    user_account = User_account.objects.get(user=user)
-    beneficiary_list = user_account.beneficiaries.all()
     data = index_renderer(user, "")
     return render(request, "finance/beneficiaries.html", data)
 
-
+@cache_page(60*5)
 @login_required(login_url=login_url)
 def profile(request):
     user = request.user
@@ -160,8 +163,8 @@ def check_account_number(request):
     user_account= User_account.objects.filter(accountNumber=num).exists()
     if not user_account:
         return JsonResponse({"error":"Invalid Account Number"})
-    recipient_user_account = User_account.objects.get(accountNumber=num)
-    current_user_account=User_account.objects.get(user=current_user)
+    recipient_user_account = User_account.objects.select_related("user").get(accountNumber=num)
+    current_user_account=User_account.objects.select_related("user").get(user=current_user)
     if current_user_account.user.username == recipient_user_account.user.username:
         return JsonResponse({"error":"Invalid Number"})
 
@@ -176,7 +179,7 @@ def send_money(request):
     amount = request.POST.get("amount")
     transactionNote = request.POST.get("transactionNote")
     current_user=request.user
-    sender= User_account.objects.get(user=current_user)
+    sender= User_account.objects.select_related("user").get(user=current_user)
     recipientExists = User_account.objects.filter(accountNumber = accountNumber).exists()
 
     #If account number is not valid
@@ -184,7 +187,7 @@ def send_money(request):
         data = index_renderer(request.user, "Failed!, Check account number.")
         return render(request, index_url, data)
         
-    recipient = User_account.objects.get(accountNumber = accountNumber)
+    recipient = User_account.objects.select_related("user").get(accountNumber = accountNumber)
 
     #if sender account number is the same as the recipient account number
     if recipient.accountNumber == sender.accountNumber:
