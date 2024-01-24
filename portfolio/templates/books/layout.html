@@ -36,7 +36,11 @@
 <!-- title and navbar  -->
 <!-- ------------------------------------------------------------------------- -->
     <a href="{% url 'index' %}" class="nav-title">Book Tracker</a>
+    <div id="portfolio-button-div">
+        <a id="portfolio-button" href="/">Back to Portfolio</a>
+    </div>
     <nav class="navbar">
+        
         <!-- search -->
         <a class="search-button">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
@@ -59,20 +63,7 @@
             <a class="log" href="{% url 'logout' %}">Logout</a>
         {% endif %}
         
-        <a id="portfolio-button" 
-        style="
-            font-size: 16px;
-            position: fixed;
-            top:0;
-            right: 50%;
-            padding: 0.1rem;
-            border-radius: 5px;
-            box-shadow: 0 0 10px black;
-            background-color: black;
-            margin: none;
-            color: beige
-        "
-        href="/">Back to Portfolio</a>
+        
         
     </nav>
     
