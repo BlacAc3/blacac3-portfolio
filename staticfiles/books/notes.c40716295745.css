@@ -1,0 +1,460 @@
+li{
+    list-style-type: none;
+}
+
+
+
+
+
+/* notes side section styling  */
+/* ------------------------------------------------------------------------------- */
+    .notes-page-div{
+        display: flex;
+        gap:10px;
+        padding: 10px;
+    }
+    .notes-side-bar{
+        display: flex;
+        width: 100%;
+    }
+    
+
+    .notes-side-bar ul{
+        width: 250px;
+        display: flex;
+        flex-direction:column;
+        padding: 1em;
+        margin-top: 10px;
+        gap: 10px;
+        height: 82vh;
+        overflow-y: scroll;
+        border-radius: 0.4em;
+        background-color: rgb(205, 244, 224);
+        box-shadow: 0 0 10px black;
+    }
+    .notes-side-bar-button{
+        position:fixed;
+        top: 75px;
+        left: -1px;
+        display: none;
+        padding: 0.2rem;
+        font-weight: bold;
+        border-radius: 0 18px 18px 0;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        color: beige;
+    }
+    .notes-side-bar-button:hover{
+        cursor: pointer;
+    }
+    
+    
+    /* scroll styling */
+    /* ------------------------------------------------------------------------- */
+        .notes-side-bar ul::-webkit-scrollbar{
+            background:transparent;
+            width: 5px;
+            border-radius: 4em;
+        }
+        .notes-side-bar ul::-webkit-scrollbar-thumb{
+            background-color: beige;
+            border-radius: 1em;
+        }
+
+    /* ----------------------------------------------------------------------------------------- */
+
+    .notes-side-bar li{
+        background-color: rgb(217, 217, 217);
+        border: 1px solid black;
+        border-radius: 0.4em;
+    }
+    .side-book-item{
+        overflow: hidden;
+        display:flex ;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.1em;
+    }
+    .side-book-item a{
+        background: rgb(217, 217, 217);
+        border-radius: 8px;
+        padding: 0.2rem;
+    }
+
+    .side-book-item a:hover{
+        background-color: rgb(209, 207, 207);
+        color: black;
+    }
+
+    .notes-side-bar h5{
+        color: black;
+        font-size: 1em;
+    }
+    .notes-side-bar p{
+        width: 100%;
+    }
+    .notes-side-bar button{
+        width: fit-content;
+        align-self:center ;
+        padding: 0.4em;
+        border-radius: 0.3em;
+        border: none;
+        margin: 0.2rem;
+        background-color: black;
+        color:beige;
+    }
+    .more-notes-section{
+        display: none;
+        overflow: hidden;
+        gap: 0.2em;
+        align-self: center;
+        margin: 5px;
+    }
+
+    .more-notes-section.more-notes-section-open{
+        display: flex;
+    }
+    
+    .more-notes-section a{
+        padding: 0.2rem;
+        border-radius: 0.4rem;
+        background-color: rgb(0, 0, 0);
+        color:beige;
+    }
+
+    .more-notes-button{
+        width: 100%;
+    }
+    .more-notes-button:hover{
+        cursor: pointer;
+        scale: 1.5;
+    }
+
+/* Notes view section  */
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+    .notes-page{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .notes-page button{
+        font-size: 19px;
+        padding: 0.8rem;
+        border: 1px solid black;
+        transition:all 0.3s ease;
+        width:fit-content;
+    }
+
+    .notes-page button:hover{
+        background-color: rgb(235, 227, 123);
+        border-radius: 8px;
+        border: 1px solid rgb(109, 106, 56);
+        cursor:pointer;
+    }
+
+/* Note editing form styling */
+/* ----------------------------- */
+        .note-edit{
+            width: 75vw;
+            gap:20px;
+            margin: auto;
+            flex-direction: column;
+        }
+
+        .note-edit h3{
+            font-size: 32px;
+            font-weight: bold;
+            padding: 1rem;
+            border-bottom: 1px solid black;
+        }
+
+        .search-book-note-input{
+            display: flex;
+            width:100%;
+            flex-direction:column;
+            gap: 10px;
+            padding:0.3rem;
+            border-radius: 10px;
+            background-color: rgb(205, 244, 224);
+            box-shadow: 0 0 5px black;
+        }
+        
+        .note-search-dropdown{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom:1px solid black ;
+            margin-bottom: 20px;
+        }
+
+        .note-search-dropdown h3{
+            border: none;
+        }
+
+        .note-edit select{
+            width: 50%;
+            height:50px;
+            outline: none;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .note-edit select:focus{
+            background-color: rgb(235, 227, 123);
+            border: 1px solid rgb(109, 106, 56);
+        }
+        
+        .note-edit option{
+            background-color: beige;
+            border-radius: 10px;
+        }
+
+        .note-edit textarea, .note-edit input{
+            padding: 0.8rem;
+            border: 2px solid black;
+            transition: all 0.2s ease ;
+        }
+
+        .note-edit textarea:focus, .note-edit input:focus{
+            outline: none;
+            border-radius: 10px;
+            border: 1px solid rgb(109, 106, 56);
+            background-color: rgb(235, 227, 123);
+            scale: 1.01;
+        }
+
+        .textarea-title{
+            resize: none;
+            width:80%;
+            padding: 0;
+            font-size: 18px;
+            height: 50px;
+            margin-top: 1rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .textarea-content{
+            width: 100%;
+            resize: none;
+            height: 50vh;
+            margin-bottom: 10px;
+        }
+
+
+        #note-textarea{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #note-search-function{
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #note-search-function button{
+            padding: 0.5rem;
+        }
+
+        #noteSearchBook{
+            width: 80%;
+        }
+
+        #search-notes-in-shelf{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.55rem;
+            border: 1px solid black;
+            background-color:  beige;
+            transition: all 0.2s ease;
+        }
+        #note-search-function.searchNoteShow{
+            display: flex;
+        }
+        #search-notes-in-shelf:hover{
+            background-color: rgb(235, 227, 123);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+    /* Note view styling */
+    /* --------------------------------------------------------------- */
+        .note-view{
+            width: 75vw;
+            height: fit-content;
+            background-color: rgb(222, 255, 255);
+            border-radius: 10px;
+            padding: 5px;
+            box-shadow: 0 0 5px black;
+        }
+        .note-view h3{
+            color: black;
+            font-size: 48px;
+            border-bottom:1px solid black ;            
+            padding: 0.2rem;
+        }
+        .note-view h3:hover{
+            color: rgb(193, 193, 193);
+        }
+
+        .note-view h4{
+            margin: 0.7rem;
+            font-size: 24px;
+        }
+        .note-view p{
+            font-size: 18px;
+            margin: 0.7rem;
+        }
+        .note-view button{
+            margin: 0.5rem;
+            padding: 0.4rem;
+        }
+
+    /* Notes list for a book styling 
+    -------------------------------------------------------------------- */
+        .book-notes-div{
+            width: 75vw;
+            
+        }
+        .note-title{
+            display: flex;
+            align-items: center ;
+            gap: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .note-title h3{
+            font-size: 60px ;
+        }
+
+        .note-title img{
+            border-radius: 10px;
+            width: 100px;
+        }
+
+        .book-notes{
+            display: flex;
+            flex-direction:column;
+            padding: 1em;
+            margin: 10px;
+            background-color:  rgb(222, 255, 255);
+            box-shadow: 0 0 5px black;
+            border-radius: 10px;
+        }
+
+        .book-note-buttons{
+            margin-top: 1rem;
+        }
+        .book-note-buttons button{
+            border-radius: 0.2rem;
+            padding: 0.5rem;
+        }
+
+
+/* media query */
+/* ------------------------------------------------------------------------------------------------------------------------------ */
+@media (max-width:990px) {
+    .notes-page-div{
+        justify-content: center;
+    }
+    .notes-side-bar{
+        display: none;
+        position:fixed;
+        top:100px;
+        right: 2px;
+        
+    }
+    .show{
+        display: flex;
+    }
+
+    .notes-side-bar-button{
+        display: block;
+    }
+    
+    .notes-side-bar ul{
+        height:80vh;
+    }
+    .note-edit{
+        margin: auto;
+        width: 100%;
+    }
+    
+
+    .note-search-dropdown{
+        flex-direction: column;
+        gap:2px;
+        align-items: flex-start;
+    }
+    .note-search-dropdown select{
+        width: 100%;
+    }
+    .note-search-dropdown button{
+        align-self: center;
+        padding: 0.3em;
+        width: 100%;
+    }
+
+    .note-view{
+        margin-top:20px ;
+        width: 98%;
+    }
+    #search-notes-in-shelf{
+        width: max(20%, 100px);
+        height: fit-content;
+        margin: 5px;
+        align-self: center;
+    }
+    .note-title{
+        flex-direction:column;
+    }
+    .note-title h3{
+        font-size: 40px;
+    }
+}
+
+@media (max-width:768px) {
+    .note-view{
+        padding-left:10px ;
+        width: 100%;
+        height: 100%;
+    }
+    .note-view h3{
+        font-size: 25px;
+    }
+    .note-view h3:hover{
+        color: rgb(193, 193, 193);
+    }
+
+    .note-view h4{
+        padding-top: 10px;
+        margin: 0;
+        font-size: 20px;
+        text-wrap: wrap;
+        overflow: hidden;
+        width: 100%;
+    }
+    .note-view p{
+        padding: 3px;
+        font-size: 18px;
+        margin: 0rem;
+        text-wrap: wrap;
+    }
+    .note-view button{
+        font-size: 14px;
+        margin: 0;
+        padding: 0.4rem;
+    }
+
+    .note-title h3{
+        font-size: 20px;
+    }
+    
+}
