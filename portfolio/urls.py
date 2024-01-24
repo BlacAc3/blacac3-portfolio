@@ -25,5 +25,4 @@ urlpatterns = [
     path("projects/books/", include("books.urls")),
     path("projects/mycli/", include("myCLI.urls")),
     path("projects/finance-app/", include("ace_finance.urls")),
-    path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
