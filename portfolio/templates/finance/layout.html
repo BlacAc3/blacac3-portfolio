@@ -45,7 +45,7 @@
         <div id="main">
             <section>
                 <ul id="sidebar-section">
-                    <h2>Overview</h2>
+                    <h2>{{current_user.username}}</h2>
                     <a href="{% url 'finance_index' %}"><li>My Account</li></a>
                     <a href="{% url 'financial_activities' %}"><li>All Transactions</li></a>
                     <a href="{% url 'beneficiaries' %}"><li>Beneficiaries</li></a>
