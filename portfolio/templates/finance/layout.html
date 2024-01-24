@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{% static 'finance/beneficiaries.css' %}">
         <link rel="stylesheet" href="{% static 'finance/profile.css' %}">
         <link rel="stylesheet" href="{% static 'finance/modal_box.css' %}">
+        <link rel="stylesheet" href="{% static 'finance/notification.css' %}">
         <script type="module" src="{% static 'finance/script.js' %}"></script>
         <title>Finance App</title>
     </head>
@@ -28,19 +29,9 @@
         
         <!-- Navbar section  -->
         <nav>
-            <a id="portfolio-button" 
-                style="
-                    font-size: 16px;
-                    position: fixed;
-                    top:0;
-                    right: 50%;
-                    padding: 0.1rem 0.5rem;
-                    border-radius: 5px;
-                    box-shadow: 0 0 10px black;
-                    background-color: rgb(97, 97, 220);
-                    margin: none;
-                    color:beige ;
-                "href="/">Back to Portfolio
+            <div id="portfolio-button-div">
+                <a id="portfolio-button" href="/">Back to Portfolio</a>
+            </div>
             </a>
             <svg class="nav-menu-icon" width="46" height="46" fill="none" stroke="#99c1f1" stroke-linecap="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.75 7.5h16.5"></path>
@@ -58,9 +49,8 @@
                     <a href="{% url 'finance_index' %}"><li>My Account</li></a>
                     <a href="{% url 'financial_activities' %}"><li>All Transactions</li></a>
                     <a href="{% url 'beneficiaries' %}"><li>Beneficiaries</li></a>
+                    <a href="{% url 'notification' %}"><li>Notifications</li></a>
                     <a href="{% url 'finance_profile' %}"><li>My Profile</li></a>
-
-                    <!-- change the url code to the conventional django urls like above in urls.py -->
                     <a href="{% url 'finance_login' %}"><li>Log Out</li></a>  
                 </ul>
             </section>
@@ -72,8 +62,6 @@
         </div>
 
         <div class="modal-container-div transaction-box">
-            
-            
             <form class="modal-container" method="post" action="{% url 'send_money' %}">
                 {% csrf_token %}
                 <svg class="modal-close-button modal-close-button-transaction" fill="#99c1f1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

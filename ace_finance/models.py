@@ -34,6 +34,7 @@ class Notification(models.Model):
 
     noti_user_account = models.ForeignKey(User_account, on_delete=models.CASCADE, related_name="notifications")
     notification_status= models.CharField(max_length=100, default ="not_read",choices=STATUS)
+    date=models.DateTimeField(default=timezone.now)
     notification_title= models.TextField()
     notification_details = models.TextField()
 

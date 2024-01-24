@@ -194,6 +194,8 @@ def send_money(request):
         data = index_renderer(request.user, "Failed!, Invalid transaction.")
         return render(request, index_url, data)
 
+    # ----------------------------------------------
+    
     #add to transactions
     new_transaction = Transaction_user.objects.create(sender = sender,recipient = recipient ,amount = amount, note=transactionNote, transaction_id = create_transaction_id())
     new_transaction.save()
@@ -217,6 +219,17 @@ def send_money(request):
         new_beneficiaries = Beneficiaries.objects.create(user_account=sender, beneficiary_user=recipient)
         new_beneficiaries.save()
 
+    #add notifications for both sender and receiver
+    sender_notification=Notification.objects.create(noti_user_account = sender, notification_status="not_read", notification_title = "Transaction", notification_details=f"Sent ${amount} to {recipient.user.username}")
+    sender_notification.save()
+    receiver_notification=Notification.objects.create(noti_user_account = recipient, notification_status="not_read", notification_title = "Transaction", notification_details=f"Received ${amount} from {sender.user.username}")
+    receiver_notification.save()
+    
+    
+        
+
+    # -------------------------------------------------
+
     data = index_renderer(request.user, "Sent! Successfully.")
     return render(request, index_url, data)
 
@@ -229,3 +242,10 @@ def create_transaction_id():
         if not id_correct:
             mode="stopped"
     return int(randNum)
+
+def notification(request):
+    user = request.user
+    notifications = Notification.objects.select_related("noti_user_account").filter(noti_user_account=user.account.first()).order_by("-date")
+    return render(request, "finance/notification.html", {
+        "notifications":notifications,
+    })

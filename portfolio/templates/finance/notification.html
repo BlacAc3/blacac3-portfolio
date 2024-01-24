@@ -1,0 +1,14 @@
+{% extends 'finance/layout.html' %}
+
+{% block body %}
+        <ul class="noti-div">
+            
+            {% for notification in notifications %}
+            <li class="noti-card">
+                <div>{{notification.notification_details}}</div>
+                <p>{{notification.date}}</p>
+            </li>
+            {% endfor %}
+            
+        </ul>
+{% endblock body %}
