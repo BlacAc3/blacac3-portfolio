@@ -36,7 +36,6 @@ def index_renderer(user, message):
         "user_account": user_account,
     }
 
-@cache_page(60*1)
 # Create your views here.
 @login_required(login_url=login_url)
 def index(request):
@@ -51,7 +50,6 @@ def transactions_compiler(user):
         Q(sender=sender_account) | Q(recipient=sender_account)
     ).order_by("-date_time")
 
-@cache_page(60*30)
 @login_required(login_url=login_url)
 def financial_activities(request):
     user=request.user
@@ -61,14 +59,12 @@ def financial_activities(request):
         "current_user":user,
     })
 
-@cache_page(60*1)
 @login_required(login_url=login_url)
 def beneficiaries(request):
     user=request.user
     data = index_renderer(user, "")
     return render(request, "finance/beneficiaries.html", data)
 
-@cache_page(60*5)
 @login_required(login_url=login_url)
 def profile(request):
     user = request.user
