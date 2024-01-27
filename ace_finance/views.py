@@ -26,7 +26,7 @@ def index_renderer(user, message):
         newAccount.save()
     user_account = User_account.objects.get(user=user)
     transactions= transactions_compiler(user)[:5]
-    beneficiary_list = user_account.beneficiaries.all()[:6]
+    beneficiary_list = Beneficiaries.objects.all()[:10]
     return {
         "balance": int(user.account.first().balance),
         "beneficiaries": beneficiary_list,
