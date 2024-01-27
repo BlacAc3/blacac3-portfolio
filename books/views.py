@@ -16,7 +16,6 @@ login_url = "login_render"
 
 
 # Create your views here.
-@cache_page(60*15)
 @login_required(login_url=login_url)
 def index(request):
     user= request.user
