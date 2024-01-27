@@ -38,8 +38,8 @@
             <ul>
                 <h3>Beneficiaries</h3>
 
-                {% for beneficiary in beneficiaries %}
-                    <li><h3>{{beneficiary.beneficiary_user.user.username}}</h3><p>{{beneficiary.beneficiary_user.accountNumber}}</p></li>
+                {% for account in accounts %}
+                    <li><h3>{{account.user.username}}</h3><p>{{account.accountNumber}}</p></li>
                 {% endfor %}
             </ul>
         </a>

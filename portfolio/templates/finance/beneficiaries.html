@@ -6,12 +6,12 @@
 
         <div class="beneficiaries-list">
             
-            {% for beneficiary in beneficiaries %}
+            {% for account in accounts %}
                 <div class="each-beneficiary">
                     <div class="each-beneficiary-info-pin">
                         <div>
-                            <h4>{{beneficiary.beneficiary_user.user.username}}</h4>
-                            <p class="copy-text" style="cursor: pointer; ">{{beneficiary.beneficiary_user.accountNumber}}</p>
+                            <h4>{{account.user.username}}</h4>
+                            <p class="copy-text" style="cursor: pointer; ">{{account.accountNumber}}</p>
                         </div>
 
                         <svg fill="#99c1f1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
