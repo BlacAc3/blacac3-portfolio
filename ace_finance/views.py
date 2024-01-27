@@ -6,6 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect 
 from django.http import JsonResponse
 from django.db.models import Q
+
+#cache import
+#---
+from django.views.decorators.cache import cache_page
+#---
+
 import random
 index_url = "finance/finance_index.html"
 login_url = "/projects/finance-app/login/"
@@ -14,20 +20,21 @@ login_url = "/projects/finance-app/login/"
 
 #This function returns important data needed to be rendered with the index page
 def index_renderer(user, message):
-    balance = user.account.first().balance
-    transactions= transactions_compiler(user)[:5]
+    user_existence=User_account.objects.filter(user=user).exists()
+    if not user_existence:
+        newAccount = User_account.objects.create(user=user, accountNumber = accountNumberGenerator())
+        newAccount.save()
     user_account = User_account.objects.get(user=user)
+    transactions= transactions_compiler(user)[:5]
     beneficiary_list = user_account.beneficiaries.all()[:6]
-    data={
-        "balance":int(balance),
-        "beneficiaries":beneficiary_list,
-        "transactions":transactions,
-        "current_user":user,
-        "popup_message":message,
-        "user_account":user_account,
+    return {
+        "balance": int(user.account.first().balance),
+        "beneficiaries": beneficiary_list,
+        "transactions": transactions,
+        "current_user": user,
+        "popup_message": message,
+        "user_account": user_account,
     }
-    return data
-
 
 # Create your views here.
 @login_required(login_url=login_url)
@@ -36,11 +43,10 @@ def index(request):
     data = index_renderer(user, "Welcome to my banking app")
     return render(request, index_url, data)
 
-
 #combines two querySets
 def transactions_compiler(user):
     sender_account=User_account.objects.get(user = user)
-    return Transaction_user.objects.filter(
+    return Transaction_user.objects.select_related("sender", "recipient").filter(
         Q(sender=sender_account) | Q(recipient=sender_account)
     ).order_by("-date_time")
 
@@ -56,12 +62,8 @@ def financial_activities(request):
 @login_required(login_url=login_url)
 def beneficiaries(request):
     user=request.user
-    user_account = User_account.objects.get(user=user)
-    beneficiary_list = user_account.beneficiaries.all()
-    return render(request, "finance/beneficiaries.html", {
-        "beneficiaries":beneficiary_list,
-    })
-
+    data = index_renderer(user, "")
+    return render(request, "finance/beneficiaries.html", data)
 
 @login_required(login_url=login_url)
 def profile(request):
@@ -157,8 +159,8 @@ def check_account_number(request):
     user_account= User_account.objects.filter(accountNumber=num).exists()
     if not user_account:
         return JsonResponse({"error":"Invalid Account Number"})
-    recipient_user_account = User_account.objects.get(accountNumber=num)
-    current_user_account=User_account.objects.get(user=current_user)
+    recipient_user_account = User_account.objects.select_related("user").get(accountNumber=num)
+    current_user_account=User_account.objects.select_related("user").get(user=current_user)
     if current_user_account.user.username == recipient_user_account.user.username:
         return JsonResponse({"error":"Invalid Number"})
 
@@ -173,7 +175,7 @@ def send_money(request):
     amount = request.POST.get("amount")
     transactionNote = request.POST.get("transactionNote")
     current_user=request.user
-    sender= User_account.objects.get(user=current_user)
+    sender= User_account.objects.select_related("user").get(user=current_user)
     recipientExists = User_account.objects.filter(accountNumber = accountNumber).exists()
 
     #If account number is not valid
@@ -181,13 +183,15 @@ def send_money(request):
         data = index_renderer(request.user, "Failed!, Check account number.")
         return render(request, index_url, data)
         
-    recipient = User_account.objects.get(accountNumber = accountNumber)
+    recipient = User_account.objects.select_related("user").get(accountNumber = accountNumber)
 
     #if sender account number is the same as the recipient account number
     if recipient.accountNumber == sender.accountNumber:
         data = index_renderer(request.user, "Failed!, Invalid transaction.")
         return render(request, index_url, data)
 
+    # ----------------------------------------------
+    
     #add to transactions
     new_transaction = Transaction_user.objects.create(sender = sender,recipient = recipient ,amount = amount, note=transactionNote, transaction_id = create_transaction_id())
     new_transaction.save()
@@ -211,6 +215,17 @@ def send_money(request):
         new_beneficiaries = Beneficiaries.objects.create(user_account=sender, beneficiary_user=recipient)
         new_beneficiaries.save()
 
+    #add notifications for both sender and receiver
+    sender_notification=Notification.objects.create(noti_user_account = sender, notification_status="not_read", notification_title = "Transaction", notification_details=f"Sent ${amount} to {recipient.user.username}")
+    sender_notification.save()
+    receiver_notification=Notification.objects.create(noti_user_account = recipient, notification_status="not_read", notification_title = "Transaction", notification_details=f"Received ${amount} from {sender.user.username}")
+    receiver_notification.save()
+    
+    
+        
+
+    # -------------------------------------------------
+
     data = index_renderer(request.user, "Sent! Successfully.")
     return render(request, index_url, data)
 
@@ -223,3 +238,10 @@ def create_transaction_id():
         if not id_correct:
             mode="stopped"
     return int(randNum)
+
+def notification(request):
+    user = request.user
+    notifications = Notification.objects.select_related("noti_user_account").filter(noti_user_account=user.account.first()).order_by("-date")
+    return render(request, "finance/notification.html", {
+        "notifications":notifications,
+    })

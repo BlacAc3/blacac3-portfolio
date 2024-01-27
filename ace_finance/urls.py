@@ -9,6 +9,7 @@ urlpatterns=[
     path("beneficiaries/", views.beneficiaries, name="beneficiaries"),
     path("my-profile/", views.profile, name="finance_profile"),
     path("login/", views.login_register, name="finance_login"),
+    path("notifications/", views.notification, name="notification"),
 
     # 
     path("send/", views.send_money, name="send_money"),

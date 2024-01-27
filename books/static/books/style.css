@@ -42,8 +42,36 @@ a:hover{
     display: none;
 }
 
+/* portfolio setup  */
+/* ------------------------------------------------------------------ */
+#portfolio-button-div{
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    top:0;
+    left: 0;
+    font-size: 10px;
 
+}
 
+#portfolio-button{
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+    background-color:beige;
+    border: black 1px solid;
+    margin: none;
+    color:black ;
+}
+
+@media (min-width:700px) {
+    #portfolio-button-div{
+        font-size: 16px;
+        justify-content: center;
+    }
+}
+/* ------------------------------------------------------------------------- */
 
 
 

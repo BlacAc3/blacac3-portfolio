@@ -14,6 +14,26 @@ a{
     color: var(--textclr);
 }
 
+#portfolio-button-div{
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    top:0;
+    left: 0;
+    font-size: 10px;
+
+}
+
+#portfolio-button{
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+    background-color:var(--darker-backgroundclr);
+    margin: none;
+    color:beige ;
+}
+
 /* for all item that can be copied  */
 .copy-text{
     transition:all 0.2s ease;
@@ -163,6 +183,7 @@ body #main{
     padding-top:0 ;
     border: solid 1px var(--textclr);
     color: var(--textclr);
+    z-index: 99;
 }
 #sidebar-section.hide{
     display:none;
@@ -505,6 +526,13 @@ body #main{
     .popup-container > div{
         font-size: 18px;
         padding: 0.7rem;
+    }
+}
+
+@media (min-width:700px) {
+    #portfolio-button-div{
+        font-size: 16px;
+        justify-content: center;
     }
 }
 

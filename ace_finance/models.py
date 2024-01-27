@@ -6,8 +6,8 @@ from django.utils import timezone
 # Create your models here.
 class User_account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="account")
-    balance = models.IntegerField(default=0)
-    accountNumber = models.IntegerField(default = 0) #Generate an account number for the user
+    balance = models.BigIntegerField(default=1000)
+    accountNumber = models.BigIntegerField(default=0) #Generate an account number for the user
     
     def __str__(self):
         return f"Username:{self.user.username}, Balance: {self.balance}, Account Number: {self.accountNumber}"
@@ -21,8 +21,23 @@ class Beneficiaries(models.Model):
 class Transaction_user(models.Model):
     sender = models.ForeignKey(User_account, on_delete=models.CASCADE, related_name="sender_transactions")
     recipient=models.ForeignKey(User_account, on_delete=models.CASCADE, related_name="receiver_transactions")
-    amount=models.IntegerField(default=0)
+    amount=models.BigIntegerField(default=0)
     note = models.CharField(max_length=200)
     date_time = models.DateTimeField(default=timezone.now)
     transaction_id=models.CharField(max_length=100)
+
+class Notification(models.Model):
+    STATUS= [
+        ("read","Read"),
+        ("not_read","Not Read")
+    ]
+
+    noti_user_account = models.ForeignKey(User_account, on_delete=models.CASCADE, related_name="notifications")
+    notification_status= models.CharField(max_length=100, default ="not_read",choices=STATUS)
+    date=models.DateTimeField(default=timezone.now)
+    notification_title= models.TextField()
+    notification_details = models.TextField()
+
+    
+    
 

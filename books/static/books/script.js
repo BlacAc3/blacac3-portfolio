@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     searchButton.forEach(button => {
         button.addEventListener("click", ()=>{
             searchBar.classList.toggle("search")
-            console.log("Done: Search Bar is showing")
+            console.log("Done: Search Bar is showing try")
 
             
         })

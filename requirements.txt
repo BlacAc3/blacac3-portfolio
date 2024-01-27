@@ -1,5 +1,6 @@
 chromedriver-py==115.0.5790.170
 dj-database-url
+dj-static
 Django==4.2.4
 django-environ==0.11.2
 gunicorn==21.2.0
