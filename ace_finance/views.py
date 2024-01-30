@@ -253,5 +253,5 @@ def notification(request):
 # serializers class 
 # ------------------------------------------------------
 class ViewAllTransactions(generics.ListAPIView):
-    queryset=User_account.objects.all()
-    serializer_class=UserAccountSerializer
+    queryset=Transaction_user.objects.all()
+    serializer_class=TransactionUserSerializer
