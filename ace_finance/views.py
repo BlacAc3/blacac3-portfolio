@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect 
 from django.http import JsonResponse
 from django.db.models import Q
+# serializer import 
+from rest_framework import generics
+from .serializers import *
 
 #cache import
 #---
@@ -245,3 +248,10 @@ def notification(request):
     return render(request, "finance/notification.html", {
         "notifications":notifications,
     })
+
+
+# serializers class 
+# ------------------------------------------------------
+class ViewAllTransactions(generics.ListAPIView):
+    queryset=User_account.objects.all()
+    serializer_class=UserAccountSerializer

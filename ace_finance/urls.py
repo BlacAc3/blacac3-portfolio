@@ -11,9 +11,12 @@ urlpatterns=[
     path("login/", views.login_register, name="finance_login"),
     path("notifications/", views.notification, name="notification"),
 
-    # 
+    #n
     path("send/", views.send_money, name="send_money"),
 
     # Javascript functions
     path("account-number/", views.check_account_number),
+
+    #serializer paths
+    path("api/all-transactions/", views.ViewAllTransactions.as_view(), name="transactions")
 ]
