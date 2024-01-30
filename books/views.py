@@ -102,7 +102,6 @@ def latest_books(request):
 
 # ---------------------------------------------------------------------------------
 # view the book details
-@cache_page(10 *60)
 def view_book(request, book_id):
     user=request.user
     book_api_url=f"https://www.googleapis.com/books/v1/volumes/{book_id}"
@@ -216,7 +215,6 @@ def removeFromCollection(request, id):
     
 
 # view collections function 
-@cache_page(5)
 def collection_view(request, collectionId):
     user=request.user
     collection_name=Collection_name.objects.get(user=user, id=collectionId)
