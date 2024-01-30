@@ -224,10 +224,11 @@ nav li:hover  .nav-num{
     font-weight: bold;
     color:var(--accent-color);
     font-family:var(--courier-font);
+    font-family: 'Lobster', sans-serif;
 }
 
 .intro h2{
-    font-family: 'Lobster', sans-serif;
+    
     font-size: 45px;
     color:var(--highlight-color);
 }
@@ -235,6 +236,7 @@ nav li:hover  .nav-num{
 .intro h3{
     width: 80%;
     margin-top: 28px;
+    
     font-family: 'Courier', Courier, monospace;
     font-size: 30px;
     color:var(--highlight-color);

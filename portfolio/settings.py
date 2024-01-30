@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "whitenoise.runserver_nostatic",
+    "rest_framework",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -158,3 +160,5 @@ DATABASES = {
     "default":dj_database_url.parse(env("DATABASE_URL"))
     
 }
+
+#redis database
