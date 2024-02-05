@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 confirmationDiv.classList.toggle("show-confirmation");
                 yes.addEventListener("click",()=>{
                     let noteId=button.id
-                    window.location.href=`/book/note/${noteId}/delete`;
+                    window.location.href=`/projects/books/book/note/${noteId}/delete`;
                 })
             })
             
