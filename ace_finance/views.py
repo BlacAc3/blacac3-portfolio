@@ -168,6 +168,7 @@ def check_account_number(request):
 
 
 #function that sends money
+@login_required(login_url=login_url)
 def send_money(request):
     if request.method != "POST":
         return redirect(index)
@@ -191,15 +192,15 @@ def send_money(request):
         return render(request, index_url, data)
 
     # ----------------------------------------------
+    #update sender's main balance
+    if int(amount)>int(sender.balance):
+        data = index_renderer(request.user, "Insufficient Balance!")
+        return render(request, index_url, data)
     
     #add to transactions
     new_transaction = Transaction_user.objects.create(sender = sender,recipient = recipient ,amount = amount, note=transactionNote, transaction_id = create_transaction_id())
     new_transaction.save()
 
-    #update sender's main balance
-    if int(amount)>int(sender.balance):
-        data = index_renderer(request.user, "Insufficient Balance!")
-        return render(request, index_url, data)
     
     new_balance = int(sender.balance) - int(amount)
     sender.balance = new_balance

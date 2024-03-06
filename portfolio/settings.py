@@ -27,7 +27,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -89,13 +89,20 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+if DEBUG == False:
+    #postgres database!!
+    import dj_database_url
+
+    DATABASES = {
+        "default":dj_database_url.parse(env("DATABASE_URL"))
+    }
 
 
 
@@ -133,10 +140,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+
 #static file setting for production
 STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / "staticfiles"
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
@@ -145,18 +153,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#----------------------------------------------------------------------------------------------------
-# Render settings
-
-# Render postgres database 
-import dj_database_url
-
-
-#postgres database!!
-DATABASES = {
-
-    "default":dj_database_url.parse(env("DATABASE_URL"))
-    
-}
 
 #redis database

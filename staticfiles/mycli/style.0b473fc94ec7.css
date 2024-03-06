@@ -1,0 +1,45 @@
+:root{
+    --text-color:rgb(26, 176, 0);
+    --body-color:rgb(3, 42, 42); 
+    --terminal-color:#24242c;
+}
+
+
+body {
+    background-color:var(--body-color) ;
+    margin: 0;
+    padding: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#terminal {
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color:var(--terminal-color) ;
+    color: var(--text-color);
+    border: 1px solid #555;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.output {
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+#input {
+    width: calc(100% - 6px);
+    padding: 3px;
+    caret-color: var(--text-color);
+    background-color: var(--terminal-color);
+    color: var(--text-color);
+    border: none;
+    outline: none;
+    font-family: 'Courier New', Courier, monospace;
+}
