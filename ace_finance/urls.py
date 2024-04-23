@@ -16,4 +16,7 @@ urlpatterns=[
 
     # Javascript functions
     path("account-number/", views.check_account_number),
+
+    #API
+    path("api/", views.transaction_api, name = "transaction_api"),
 ]

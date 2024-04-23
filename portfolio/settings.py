@@ -27,7 +27,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "whitenoise.runserver_nostatic",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -96,7 +97,7 @@ DATABASES = {
     }
 }
 
-if DEBUG == False:
+if not DEBUG:
     #postgres database!!
     import dj_database_url
 

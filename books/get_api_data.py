@@ -8,8 +8,10 @@ def compile_api_data(book_api_url):
         data = response.json()
 
         #getting all books information from the api
-        vol=data.get("volumeInfo",{})
-        id= data.get("id", "")
+        vol=data.get("volumeInfo",{}) 
+        id= data.get("id", "") ##Get Book's ID
+
+
         title=vol.get("title", "")
         authors=vol.get("authors","")
         imageLinks=vol.get("imageLinks",{}).get("smallThumbnail","")

@@ -45,7 +45,7 @@ class Collection_name(models.Model):
 
 #Collection Content
 # ------------------------------------------------------------------
-class  Collection(models.Model):
+class Collection(models.Model):
     id=models.AutoField(primary_key=True)
     folder=models.ManyToManyField(Collection_name, related_name="content")
     books=models.ForeignKey(Book_shelf, on_delete=models.CASCADE, default=None)

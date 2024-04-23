@@ -7,6 +7,12 @@ from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.db.models import Q
 
+#Rest framework import
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import *
+
 #cache import
 #---
 from django.views.decorators.cache import cache_page
@@ -246,3 +252,10 @@ def notification(request):
     return render(request, "finance/notification.html", {
         "notifications":notifications,
     })
+
+@api_view(["GET"])
+def transaction_api(request):
+    if request.method == "GET":
+        accounts = User_account.objects.all()
+        serializers = AccountSerializer(accounts, many=True)
+    return Response(serializers.data)
