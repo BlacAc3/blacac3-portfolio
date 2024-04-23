@@ -21,4 +21,4 @@ requests
 trio
 trio-websocket
 urllib3
-rest_framework
+djangorestframework
